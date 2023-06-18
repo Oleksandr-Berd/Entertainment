@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "name": "home",
+    "icon": "homeMob"
+  },
+  {
+    "id": 2,
+    "name": "movies",
+    "icon": "moviesMob"
+  },
+   {
+     "id": 3,
+     "name": "tv",
+     "icon": "tvMob"
+   },
+    {
+      "id": 4,
+      "name": "bookmarked",
+      "icon": "bookmarkedMob"
+    }
+]
