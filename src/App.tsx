@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import { Route, Routes } from "react-router-dom";
 
 import './App.css';
@@ -9,9 +9,12 @@ import MoviesPage from 'Pages/MoviesPage/MoviesPage';
 import TVPage from 'Pages/TVPage/TVPage';
 import Bookmarked from 'Pages/Bookmarked/Bookmarked';
 import LoginPage from 'Pages/LoginPage/LoginPage';
-import RegisterPage from 'Pages/RegisterPage/Registerpage';
+// import RegisterPage from 'Pages/RegisterPage/RegisterPage';
+
+const RegisterPage = lazy(() => import("./Pages/RegisterPage/RegisterPage"))
 
 const App: React.FC = () => {
+  
   return (
     <div className="App">
       <GlobalStyles />
