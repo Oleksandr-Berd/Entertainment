@@ -1,16 +1,30 @@
 import React from 'react';
+import { Route, Routes } from "react-router-dom";
+
 import './App.css';
 import { GlobalStyles } from './utilities/GlobalStyles';
 import SharedLayout from './components/SharedLayout/SharedLayout';
-import Header from 'components/Header/Header';
+import HomePage from 'Pages/HomePage/HomePage';
+import MoviesPage from 'Pages/MoviesPage/MoviesPage';
+import TVPage from 'Pages/TVPage/TVPage';
+import Bookmarked from 'Pages/Bookmarked/Bookmarked';
+import LoginPage from 'Pages/LoginPage/LoginPage';
+import RegisterPage from 'Pages/RegisterPage/Registerpage';
 
-const App:React.FC = () => {
+const App: React.FC = () => {
   return (
     <div className="App">
       <GlobalStyles />
-      <SharedLayout>
-        <Header/>
-      </SharedLayout>
+      <Routes>
+        <Route path="/" element={<SharedLayout />}>
+          <Route index element={<HomePage />}/>
+          <Route path='/movies' element={<MoviesPage />}/>
+          <Route path='/tv' element={<TVPage />} />
+          <Route path='/bookmarked' element={<Bookmarked />} />
+        </Route>
+        <Route path='login' element={<LoginPage />} />
+        <Route path='registration' element={<RegisterPage />} />
+      </Routes>
     </div>
   );
 }

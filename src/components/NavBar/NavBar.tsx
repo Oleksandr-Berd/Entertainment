@@ -3,6 +3,8 @@ import { NavLink } from "react-router-dom";
 
 import navData from "dataBase/nav.json";
 
+import * as SC from "./NavBarStyled"
+
 import homeMob from "assets/icons/homeMob.png";
 import moviesMob from "assets/icons/movieMob.png";
 import tvMob from "assets/icons/tvMob.png";
@@ -25,18 +27,18 @@ const navIcons: Record<string, string> = {
 
 const Navbar: React.FC = () => {
     return (
-        <nav>
+        <SC.NavBar>
             {navData.map(({ id, name, icon }: Navigation) => {
                 const mobileIcon = navIcons[icon];
                 return (
-                    <li key={id}>
+                    <SC.Item key={id}>
                         <NavLink to={name}>
                             <img src={mobileIcon} alt={name} className="mobile-icon" />
                         </NavLink>
-                    </li>
+                    </SC.Item>
                 );
             })}
-        </nav>
+        </SC.NavBar>
     );
 };
 
