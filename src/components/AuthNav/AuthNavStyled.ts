@@ -15,5 +15,12 @@ export const AuthNavItem = styled.li`
 export const AuthNavLink = styled(NavLink)`
   text-decoration: none;
   color: ${(props) => props.theme.color.white};
-  font-size: ${props => props.theme.size.XS};
+  font-size: ${(props) => props.theme.size.XS};
+
+  transition: color 0.3s ease-in-out;
+
+  &:hover {
+    color: ${(props) => props.theme.color.red};
+    transition: color 0.3s ease-in-out;
+  }
 `;

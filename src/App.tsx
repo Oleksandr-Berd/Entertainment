@@ -29,10 +29,7 @@ const App: React.FC = () => {
         <Route path="auth" element={<AuthLayout />}>
           <Route path='/auth/login' element={<LoginPage />} />
           <Route path='/auth/registration' element={<RegisterPage />} />
-        </Route>
-          
-        
-       
+        </Route>       
       </Routes>
     </div>
   );

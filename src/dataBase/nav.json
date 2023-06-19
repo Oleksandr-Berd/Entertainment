@@ -6,17 +6,17 @@
   },
   {
     "id": 2,
-    "name": "movies",
+    "name": "/movies",
     "icon": "moviesMob"
   },
    {
      "id": 3,
-     "name": "tv",
+     "name": "/tv",
      "icon": "tvMob"
    },
     {
       "id": 4,
-      "name": "bookmarked",
+      "name": "/bookmarked",
       "icon": "bookmarkedMob"
     }
 ]
