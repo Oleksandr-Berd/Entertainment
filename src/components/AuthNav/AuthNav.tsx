@@ -6,7 +6,7 @@ const AuthNav: React.FC = () => {
             <SC.AuthNavLink to="/auth/login">Login</SC.AuthNavLink>
         </SC.AuthNavItem>
         <SC.AuthNavItem>
-            <SC.AuthNavLink to="/auth/registration">Registration</SC.AuthNavLink>
+            <SC.AuthNavLink to="/auth/registration">Sign Up</SC.AuthNavLink>
             </SC.AuthNavItem>
     </SC.AuthNav>);
 }

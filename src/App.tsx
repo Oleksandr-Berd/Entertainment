@@ -10,8 +10,8 @@ const HomePage = lazy(() => import('Pages/HomePage/HomePage'))
 const MoviesPage = lazy(() => import('Pages/MoviesPage/MoviesPage'))
 const TVPage = lazy(() => import('Pages/TVPage/TVPage'))
 const Bookmarked = lazy(() => import('Pages/Bookmarked/Bookmarked'))
-const RegisterPage = lazy(() => import("./Pages/RegisterPage/Registerpage"))
-const LoginPage = lazy(() => import('Pages/LoginPage/LoginPage'))
+const AuthPage = lazy(() => import("./Pages/AuthPage/AuthPage"))
+// const LoginPage = lazy(() => import('Pages/LoginPage/LoginPage'))
 
 const App: React.FC = () => {
   
@@ -27,8 +27,8 @@ const App: React.FC = () => {
           
         </Route>
         <Route path="auth" element={<AuthLayout />}>
-          <Route path='/auth/login' element={<LoginPage />} />
-          <Route path='/auth/registration' element={<RegisterPage />} />
+          <Route path='/auth/login' element={<AuthPage />} />
+          <Route path='/auth/registration' element={<AuthPage />} />
         </Route>       
       </Routes>
     </div>
