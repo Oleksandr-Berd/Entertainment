@@ -1,10 +1,12 @@
-import React, { lazy } from 'react';
+import React, { lazy, useState, useEffect } from 'react';
 
 import { Route, Routes } from "react-router-dom";
 
 import { GlobalStyles } from './utilities/GlobalStyles';
 import SharedLayout from './components/SharedLayout/SharedLayout';
 import AuthLayout from 'components/AuthLayout/AuthLayout';
+import { fetchAllMovies } from 'utilities/services';
+import { useConsole } from 'hooks/useConsole';
 
 const HomePage = lazy(() => import('Pages/HomePage/HomePage'))
 const MoviesPage = lazy(() => import('Pages/MoviesPage/MoviesPage'))
@@ -14,7 +16,23 @@ const AuthPage = lazy(() => import("./Pages/AuthPage/AuthPage"))
 // const LoginPage = lazy(() => import('Pages/LoginPage/LoginPage'))
 
 const App: React.FC = () => {
+  const [isLoading, setIsLoading] = useState(false)
+  const [data, setData] = useState([])
+
   
+  const getAllMovies = async () => {
+    setIsLoading(true)
+    const result = await fetchAllMovies()
+    
+    setData(result)
+}
+useEffect(() => {
+  getAllMovies()
+  setIsLoading(false)
+}, [])
+
+
+  useConsole(data)
   return (
     <div className="App">
       <GlobalStyles />
