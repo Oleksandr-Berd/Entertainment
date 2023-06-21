@@ -1,15 +1,14 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
 
 import navData from "dataBase/nav.json";
 
 import * as SC from "./NavBarStyled"
 
-import homeMob from "assets/icons/homeMob.png";
-import moviesMob from "assets/icons/movieMob.png";
-import tvMob from "assets/icons/tvMob.png";
-import bookmarkedMob from "assets/icons/bookmarkMob.png";
-
+import { ReactComponent as HomeSvg } from 'assets/icons/home.svg'
+import { ReactComponent as MovieSvg } from 'assets/icons/movies.svg'
+import { ReactComponent as TvSvg } from 'assets/icons/tv.svg'
+import { ReactComponent as BookmarkSvg } from 'assets/icons/Bookmark.svg'
+import { useLocation } from "react-router";
 
 interface Navigation {
     id: number;
@@ -18,23 +17,25 @@ interface Navigation {
 };
 
 
-const navIcons: Record<string, string> = {
-    homeMob,
-    moviesMob,
-    tvMob,
-    bookmarkedMob,
+const navIcons: Record<string, React.FC<React.SVGProps<SVGSVGElement>>> = {
+    homeMob: HomeSvg,
+    moviesMob: MovieSvg,
+    tvMob: TvSvg,
+    bookmarkedMob: BookmarkSvg,
 };
 
 const Navbar: React.FC = () => {
+    const location = useLocation()
+
     return (
         <SC.NavBar>
             {navData.map(({ id, name, icon }: Navigation) => {
-                const mobileIcon = navIcons[icon];
+                const IconComponent = navIcons[icon];
                 return (
                     <SC.Item key={id}>
-                        <NavLink to={name}>
-                            <img src={mobileIcon} alt={name} className="mobile-icon" />
-                        </NavLink>
+                        <SC.Link to={name}>
+                            <IconComponent fill={location.pathname !== name ? "#5A698F" : "#fff"} width={16} height={16}/>
+                        </SC.Link>
                     </SC.Item>
                 );
             })}
