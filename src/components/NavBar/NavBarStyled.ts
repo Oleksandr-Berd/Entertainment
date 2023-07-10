@@ -18,11 +18,11 @@ export const Link = styled(NavLink)`
     transition: fill 0.3s ease-in-out;
   }
 
-  &:hover > *
+  /* &:hover > *
   {
     fill: ${(props) => props.theme.color.red};
     transition: fill 0.3s ease-in-out;
-  }
+  } */
 `;
 
 export const Image = styled.img`

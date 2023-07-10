@@ -5,22 +5,21 @@ const theme: object = {
     "8px", //2
     "12px", //3
     "16px", //4
-    "18px", //5
-    "20px", //6
-    "24px", //7
-    "28px", //8
-    "32px", //9
-    "36px", //10
-    "40px", //11
-    "48px", //12
-    "56px", //13
+    "20px", //5
+    "24px", //6
+    "28px", //7
+    "32px", //8
+    "36px", //9
+    "40px", //10
+    "48px", //11
+    "56px", //12
+    "72px", //13
     "64px", //14
-    "72px", //15
-    "128px", //16
-    "160px", //17
-    "256px", //18
-    "312px", //19
-    "512px", //20
+    "128px", //15
+    "160px", //16
+    "256px", //17
+    "312px", //18
+    "512px", //19
   ],
 
   percentage: [
@@ -47,13 +46,14 @@ const theme: object = {
     XXL: "72px",
     XL: "64px",
     L: "56px",
-    XXM: "48px",
+    SL: "48px",
+    XXM: "40px",
     XM: "36px",
     M: "32px",
+    SM: "28px",
     XXN: "24px",
     XN: "20px",
-    N: "18px",
-    NS: "16px",
+    N: "16px",
     S: "14px",
     XS: "12px",
   },
@@ -61,6 +61,7 @@ const theme: object = {
   weight: {
     bold: "700",
     normal: "400",
+    light: "48",
   },
 
   fontFamily: {
@@ -68,6 +69,7 @@ const theme: object = {
   },
   color: {
     red: "#FC4747",
+    grey: "#979797",
     white: "#ffffff",
     main: "#10141E",
     secondary: "#5A698F",
