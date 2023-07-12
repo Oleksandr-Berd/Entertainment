@@ -12,8 +12,39 @@ export const AllMoviesList = styled.ul`
 
 export const AllMoviesItemStyled = styled.li`
 
-
 `
+
+export const BookmarkContainer = styled.div`
+position: relative;
+`
+
+export const BookmarkButton = styled.button`
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  transform: translateY(8px) translateX(-8px);
+
+  padding-top: 9px;
+  padding-bottom: 7px;
+  padding-right: 10px;
+  padding-left: 10px;
+
+  background-color: ${(props) => props.theme.color.semiDark};
+
+  border-radius: ${(props) => props.theme.radius[5]};
+  border: none;
+
+  opacity: 0.5;
+
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: ${(props) => props.theme.color.semiDark};
+    border: none;
+  }
+`;
+
 
 export const AllMoviesItemImage = styled.img`
 width: 164px;

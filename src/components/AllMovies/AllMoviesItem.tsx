@@ -1,5 +1,6 @@
 import * as SC from "./AllMoviesStyled"
 import { navIcons } from "utilities/navIcons"
+import {ReactComponent as BookmarkSvg} from "../../assets/icons/Bookmark.svg"
 
 interface ItemProps {
     title: string,
@@ -20,7 +21,12 @@ const AllMoviesItem = ({ title, thumbnail, year, category, rating, isBookmarked 
 
 
     return (<li>
-        <SC.AllMoviesItemImage src={thumbnailMobile} alt="" />
+        <SC.BookmarkContainer>
+            <SC.BookmarkButton type="button">
+                <BookmarkSvg width={12} height={14} stroke="white" fill={isBookmarked ? "white" : "none"} style={{ strokeWidth: "2px", opacity:"1" }} />
+            </SC.BookmarkButton>
+            <SC.AllMoviesItemImage src={thumbnailMobile} alt="" />
+        </SC.BookmarkContainer>
         <SC.AllMoviesInfoContainer>
             <p>{year}</p>
             <SC.Circle></SC.Circle>
