@@ -11,8 +11,8 @@ export const AllMoviesList = styled.ul`
 `;
 
 export const AllMoviesItemStyled = styled.li`
-
-`
+  min-width: 164px;
+`;
 
 export const BookmarkContainer = styled.div`
 position: relative;
@@ -47,8 +47,8 @@ export const BookmarkButton = styled.button`
 
 
 export const AllMoviesItemImage = styled.img`
-width: 164px;
-height: 110px;
+width: 100%;
+min-height: 110px;
 
 margin-bottom: ${props => props.theme.space[2]};
 
