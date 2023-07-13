@@ -25,7 +25,7 @@ export const BookmarkButton = styled.button`
 
   transform: translateY(8px) translateX(-8px);
 
-  padding-top: 9px;
+  padding-top: 2px;
   padding-bottom: 7px;
   padding-right: 10px;
   padding-left: 10px;

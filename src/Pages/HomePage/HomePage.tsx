@@ -1,14 +1,15 @@
 import { useEffect, useState } from 'react';
-import { fetchAllMovies } from 'utilities/services';
+import { fetchAllMovies, fetchTrending } from 'utilities/services';
 import AllMovies from '../../components/AllMovies/AllMovies';
 import { Dna } from 'react-loader-spinner';
 
 import * as SC from "./HomePageStyled"
+import Trending from 'components/Trending/Trending';
 
 export interface DataArray {
     _id: string,
     title: string,
-    thumbnail: { regular: { small: string } }
+    thumbnail: { regular: { small: string }, trending?:{small:string, large:string} }
 ,
     year: number,
     category: string,
@@ -22,6 +23,7 @@ const HomePage = (): JSX.Element => {
     const [isLoading, setIsLoading] = useState<Boolean>(false)
     const [isError, setIsError] = useState<null | string>(null)
     const [data, setData] = useState<DataArray[]>([])
+    const [trending, setTrending] = useState<DataArray[]>([])
 
 
     const getAllMovies = async () => {
@@ -36,13 +38,39 @@ const HomePage = (): JSX.Element => {
         }
        
     }
+
+    const getTrending = async () => {
+        setIsLoading(true)
+        try {
+            const result = await fetchTrending()
+            setTrending(result.data.result)
+        } catch (error) {
+            setIsError(error as string)
+        } finally {
+            setIsLoading(false)
+        }
+    }
     useEffect(() => {
         getAllMovies()
+        getTrending()
     }, [])
+
+    console.log(trending);
+    
     
     return (
         <SC.CommonContainer>
             <SC.Title>Trending</SC.Title>
+            {isLoading ? <Dna
+                visible={true}
+                height="80"
+                width="80"
+                ariaLabel="dna-loading"
+                wrapperStyle={{}}
+                wrapperClass="dna-wrapper"
+            /> : <>
+                    <Trending movies={trending} error={isError} />
+            </>}
             <SC.Title>Recommended for you</SC.Title>
             {isLoading ? <Dna
                 visible={true}
