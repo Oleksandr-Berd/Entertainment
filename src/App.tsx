@@ -1,10 +1,11 @@
-import React, { lazy } from 'react';
+import React, { lazy, useEffect, useState } from 'react';
 
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useSearchParams } from "react-router-dom";
 
 import { GlobalStyles } from './utilities/GlobalStyles';
 import SharedLayout from './components/SharedLayout/SharedLayout';
 import AuthLayout from 'components/AuthLayout/AuthLayout';
+import { DataArray } from 'Pages/HomePage/HomePage';
 
 const HomePage = lazy(() => import('Pages/HomePage/HomePage'))
 const MoviesPage = lazy(() => import('Pages/MoviesPage/MoviesPage'))
@@ -12,22 +13,24 @@ const TVPage = lazy(() => import('Pages/TVPage/TVPage'))
 const Bookmarked = lazy(() => import('Pages/Bookmarked/Bookmarked'))
 const AuthPage = lazy(() => import("./Pages/AuthPage/AuthPage"))
 const NotFound = lazy(() => import("./Pages/NotFound/NotFound"))
-const SearchPage = lazy(() => import ("./Pages/SearchPage/SearchPage"))
 
 
 
 const App = ():JSX.Element => {
- 
+
+
+
+
+
   return (
     <div className="App">
       <GlobalStyles />
       <Routes>
         <Route path="/" element={<SharedLayout />}>
-          <Route index element={<HomePage />}/>
+          <Route index element={<HomePage/>}/>
           <Route path='/movies' element={<MoviesPage />}/>
           <Route path='/tv' element={<TVPage />} />
           <Route path='/bookmarked' element={<Bookmarked />} />
-          <Route path='/search' element={<SearchPage/> } />
         </Route>
         <Route path="auth" element={<AuthLayout />}>
           <Route path='/auth/login' element={<AuthPage />} />
