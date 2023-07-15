@@ -80,9 +80,6 @@ const HomePage = (): JSX.Element => {
 
     }
 
-    console.log(searchFilter);
-
-
     return (
         <SC.CommonContainer>
             <Search submitSearch={getSearchData} />

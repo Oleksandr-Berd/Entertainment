@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { BiSearchAlt } from 'react-icons/bi';
 
+import * as SC from "./SearchStyled"
+
 interface ISearchProps {
    submitSearch: (filter:string) => void
 }
@@ -17,7 +19,7 @@ const Search = ({ submitSearch }: ISearchProps): JSX.Element => {
     }
     
 
-    
+
     useEffect(() => {
 
         if (filter.length >= 3) { submitSearch(filter) } else { submitSearch("") }
@@ -26,12 +28,12 @@ const Search = ({ submitSearch }: ISearchProps): JSX.Element => {
      }, [filter])
    
 
-    return (<div>
+    return (<SC.CommonContainer>
         <div>
             <BiSearchAlt size={18} />
         </div>
-        <input type="text" onChange={handleChange} placeholder="Search for movies or TV series"/>
-    </div> );
+        <SC.SearchInput type="text" onChange={handleChange} placeholder="Search for movies or TV series"/>
+    </SC.CommonContainer> );
 }
  
 export default Search;

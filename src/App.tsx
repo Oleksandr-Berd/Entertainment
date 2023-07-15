@@ -1,11 +1,10 @@
-import React, { lazy, useEffect, useState } from 'react';
+import React, { lazy } from 'react';
 
-import { Route, Routes, useSearchParams } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 
 import { GlobalStyles } from './utilities/GlobalStyles';
 import SharedLayout from './components/SharedLayout/SharedLayout';
 import AuthLayout from 'components/AuthLayout/AuthLayout';
-import { DataArray } from 'Pages/HomePage/HomePage';
 
 const HomePage = lazy(() => import('Pages/HomePage/HomePage'))
 const MoviesPage = lazy(() => import('Pages/MoviesPage/MoviesPage'))
