@@ -5,6 +5,7 @@ import { Dna } from 'react-loader-spinner';
 
 import * as SC from "./HomePageStyled"
 import Trending from 'components/Trending/Trending';
+import Search from 'components/Search/Search';
 
 export interface DataArray {
     _id: string,
@@ -54,12 +55,11 @@ const HomePage = (): JSX.Element => {
         getAllMovies()
         getTrending()
     }, [])
-
-    console.log(trending);
     
     
     return (
         <SC.CommonContainer>
+            <Search/>
             <SC.Title>Trending</SC.Title>
             {isLoading ? <Dna
                 visible={true}

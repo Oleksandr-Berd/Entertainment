@@ -11,7 +11,8 @@ const MoviesPage = lazy(() => import('Pages/MoviesPage/MoviesPage'))
 const TVPage = lazy(() => import('Pages/TVPage/TVPage'))
 const Bookmarked = lazy(() => import('Pages/Bookmarked/Bookmarked'))
 const AuthPage = lazy(() => import("./Pages/AuthPage/AuthPage"))
-const NotFound = lazy (() => import("./Pages/NotFound/NotFound"))
+const NotFound = lazy(() => import("./Pages/NotFound/NotFound"))
+const SearchPage = lazy(() => import ("./Pages/SearchPage/SearchPage"))
 
 
 
@@ -26,7 +27,7 @@ const App = ():JSX.Element => {
           <Route path='/movies' element={<MoviesPage />}/>
           <Route path='/tv' element={<TVPage />} />
           <Route path='/bookmarked' element={<Bookmarked />} />
-          
+          <Route path='/search' element={<SearchPage/> } />
         </Route>
         <Route path="auth" element={<AuthLayout />}>
           <Route path='/auth/login' element={<AuthPage />} />
