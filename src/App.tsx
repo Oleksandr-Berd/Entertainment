@@ -11,22 +11,25 @@ const MoviesPage = lazy(() => import('Pages/MoviesPage/MoviesPage'))
 const TVPage = lazy(() => import('Pages/TVPage/TVPage'))
 const Bookmarked = lazy(() => import('Pages/Bookmarked/Bookmarked'))
 const AuthPage = lazy(() => import("./Pages/AuthPage/AuthPage"))
-const NotFound = lazy (() => import("./Pages/NotFound/NotFound"))
+const NotFound = lazy(() => import("./Pages/NotFound/NotFound"))
 
 
 
 const App = ():JSX.Element => {
- 
+
+
+
+
+
   return (
     <div className="App">
       <GlobalStyles />
       <Routes>
         <Route path="/" element={<SharedLayout />}>
-          <Route index element={<HomePage />}/>
+          <Route index element={<HomePage/>}/>
           <Route path='/movies' element={<MoviesPage />}/>
           <Route path='/tv' element={<TVPage />} />
           <Route path='/bookmarked' element={<Bookmarked />} />
-          
         </Route>
         <Route path="auth" element={<AuthLayout />}>
           <Route path='/auth/login' element={<AuthPage />} />
