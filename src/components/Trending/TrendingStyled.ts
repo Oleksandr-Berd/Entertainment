@@ -1,14 +1,16 @@
 import { Carousel } from "react-bootstrap";
-import styled from "styled-components"
+import styled from "styled-components";
 
 export const CommonContainer = styled(Carousel)`
-display: flex;
-flex-direction: row;
-align-items: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  margin-bottom: ${props => props.theme.space[6]};
 `;
 
 export const ItemStyled = styled(Carousel.Item)`
-position: relative;
+  position: relative;
 
   min-width: 240px;
   min-height: 140px;
@@ -24,9 +26,11 @@ export const ImageTrending = styled.img`
 `;
 
 export const BookmarkButton = styled.button`
-position: absolute;
-top: 0;
-right: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 10;
+  transform: translateY(8px) translateX(-8px);
 
   width: ${(props) => props.theme.space[8]};
   height: ${(props) => props.theme.space[8]};
@@ -52,11 +56,11 @@ right: 0;
 `;
 
 export const CaptionStyled = styled(Carousel.Caption)`
-display: flex;
-flex-direction: row;
-align-items: center;
-justify-content: space-between;
-`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+`;
 
 export const Circle = styled.div`
   width: 2px;
@@ -72,19 +76,24 @@ export const ContentContainer = styled.div`
   flex-direction: row;
   align-items: center;
 
+  margin-bottom: ${props => props.theme.space[1]};
+
+  font-size: 12px;
   color: ${(props) => props.theme.color.white};
 
-  & > *:not(:last-child){
-    margin-right: ${props => props.theme.space[2]};
+  & > *:not(:last-child) {
+    margin-right: ${(props) => props.theme.space[2]};
   }
 `;
 
 export const Title = styled.h5`
-text-align: left;
+  text-align: left;
 
-color: ${props => props.theme.color.white};
-`
+  color: ${(props) => props.theme.color.white};
+  font-weight: ${props => props.theme.weight.normal};
+  font-size: 15px;
+`;
 
 export const RatingContainer = styled.div`
-color: ${props =>props.theme.color.white};
-`
+  color: ${(props) => props.theme.color.white};
+`;
