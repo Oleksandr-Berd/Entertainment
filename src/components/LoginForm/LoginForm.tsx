@@ -1,7 +1,7 @@
 
 import * as SC from "./LoginFormStyled"
 
-const LoginForm = () => {
+const LoginForm:React.FC = () => {
     return (<SC.FormContainer>
         <form>
             <SC.TitleContainer>

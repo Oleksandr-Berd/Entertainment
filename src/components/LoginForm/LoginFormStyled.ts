@@ -88,7 +88,7 @@ export const StyledLink = styled(NavLink)`
 
   text-decoration: none;
 
-  color: ${(props) => props.theme.color.white};
+  color: ${(props) => props.theme.color.red};
   font-weight: ${(props) => props.theme.weight.normal};
   font-size: ${(props) => props.theme.size.S};
 

@@ -16,7 +16,7 @@ interface ItemProps {
 const MovieIcon = navIcons.moviesMob;
 const TvIcon = navIcons.tvMob
 
-const AllMoviesItem = ({ title, thumbnail, year, category, rating, isBookmarked }: ItemProps): JSX.Element => {
+const AllMoviesItem: React.FC<ItemProps> = ({ title, thumbnail, year, category, rating, isBookmarked }) => {
     const thumbnailMobile = thumbnail?.regular?.small ?? ""
 
 

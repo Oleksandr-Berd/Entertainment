@@ -7,7 +7,7 @@ interface ISearchProps {
    submitSearch: (filter:string) => void
 }
 
-const Search = ({ submitSearch }: ISearchProps): JSX.Element => {
+const Search: React.FC<ISearchProps> = ({ submitSearch } ) => {
     
     const [filter, setFilter] = useState<string >("")
 

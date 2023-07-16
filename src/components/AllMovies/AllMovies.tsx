@@ -7,7 +7,7 @@ interface MoviesProps {
     error: string | null;
 }
 
-const AllMovies = ({ movies, error }: MoviesProps): JSX.Element => {
+const AllMovies: React.FC<MoviesProps> = ({ movies, error } ) => {
 
     return (
         <div>
