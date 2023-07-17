@@ -7,19 +7,7 @@ import * as SC from "./HomePageStyled"
 import Trending from 'components/Trending/Trending';
 import Search from 'components/Search/Search';
 import SearchPage from 'Pages/SearchPage/SearchPage';
-
-export interface DataArray {
-    _id: string,
-    title: string,
-    thumbnail: { regular: { small: string }, trending?: { small: string, large: string } }
-    ,
-    year: number,
-    category: string,
-    rating: string,
-    isBookmarked: boolean,
-    isTrending: boolean,
-    image: string,
-}
+import { DataArray } from 'interfaces/interfaces';
 
 
 const HomePage = (): JSX.Element => {
@@ -29,7 +17,7 @@ const HomePage = (): JSX.Element => {
     const [trending, setTrending] = useState<DataArray[]>([])
     const [searchData, setSearchData] = useState<DataArray[] | null>([])
     const [searchFilter, setSearchFilter] = useState("")
-    
+
 
 
     const getAllMovies = async () => {
@@ -72,7 +60,7 @@ const HomePage = (): JSX.Element => {
             )
             setSearchData(filterData.length > 0 ? filterData : null)
 
-            setSearchFilter(filter) 
+            setSearchFilter(filter)
         } else {
             setSearchData([])
         }

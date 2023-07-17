@@ -45,10 +45,6 @@ export const StyledInput = styled.input`
 
   border-bottom: 1px solid ${(props) => props.theme.color.secondary};
 
-  &&&:active, &&&:hover, &&&:focus{
-    background-color: transparent;
-    border: none;
-  }
 `;
 
 export const StyledButton = styled.button`

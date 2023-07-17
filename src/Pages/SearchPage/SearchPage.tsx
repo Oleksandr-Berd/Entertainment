@@ -1,7 +1,7 @@
-import { DataArray } from "Pages/HomePage/HomePage";
 import AllMoviesItem from "components/AllMovies/AllMoviesItem";
 
 import * as SC from "./SearchPageStyled"
+import { DataArray } from "interfaces/interfaces";
 
 interface ISearchPageProps{
     searchMovie: DataArray[] | null;

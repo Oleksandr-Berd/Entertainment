@@ -6,19 +6,19 @@ import * as SC from './AuthPageStyled'
 
 import LoginForm from "components/LoginForm/LoginForm";
 import RegistrationForm from "components/RegistrationForm/RegistrationForm";
-import { IFormValues } from "components/interfaces/interfaces";
+import { IFormValues } from "interfaces/interfaces";
 
 const AuthPage: React.FC = () => {
-const location = useLocation()    
+    const location = useLocation()
 
     const handleSubmit = (data: IFormValues) => {
-console.log(data);
+        console.log(data);
     }
-    
+
     return (<SC.AuthContainer>
 
 
-        
+
 
         <LogoSvg width={36} />
         {location.pathname === "/auth/login" ? <LoginForm /> : <RegistrationForm submit={handleSubmit} />}

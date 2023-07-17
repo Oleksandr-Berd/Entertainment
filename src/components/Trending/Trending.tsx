@@ -2,9 +2,9 @@ import Carousel from 'react-bootstrap/Carousel';
 
 import * as SC from "./TrendingStyled"
 
-import { DataArray } from "Pages/HomePage/HomePage";
 import { ReactComponent as BookmarkSvg } from "../../assets/icons/Bookmark.svg"
 import { navIcons } from "utilities/navIcons"
+import { DataArray } from 'interfaces/interfaces';
 
 interface MoviesProps {
     movies?: DataArray[];

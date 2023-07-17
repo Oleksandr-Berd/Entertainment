@@ -2,9 +2,9 @@ import * as Yup from "yup"
 import { useFormik } from "formik"
 
 import * as SC from "../LoginForm/LoginFormStyled"
-import { IFormValues } from "components/interfaces/interfaces"
+import { IFormValues } from "interfaces/interfaces"
 import { ChangeEvent } from "react"
-import { IFormProps } from '../interfaces/interfaces';
+import { IFormProps } from '../../interfaces/interfaces';
 
 const InputDataSchema = Yup.object().shape({
     name: Yup.string().min(2, "There is no such short name").required("Name is required"),
