@@ -62,8 +62,8 @@ export const logout:any = createAsyncThunk("auth/logout", async (_, thunkAPI) =>
  * GET @ /users/current
  * headers: Authorization: Bearer token
  */
-export const refreshUser = createAsyncThunk(
-  "auth/refresh",
+export const refreshUser:any = createAsyncThunk(
+  "auth/current",
   async (_, thunkAPI) => {
     // Reading the token from the state via getState()
     const state:any = thunkAPI.getState();
@@ -77,7 +77,7 @@ export const refreshUser = createAsyncThunk(
     try {
       // If there is a token, add it to the HTTP header and perform the request
       setAuthHeader(persistedToken);
-      const res = await axios.get("/users/me");
+      const res = await axios.get("auth/current");
       return res.data;
     } catch (error:any) {
       return thunkAPI.rejectWithValue(error.message);
