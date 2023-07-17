@@ -1,13 +1,12 @@
-import axios from "axios";
-
+import axios, { AxiosResponse } from "axios";
 
 const instance = axios.create({
   baseURL: "https://common-server-ldx7.onrender.com/api/entertainment",
 });
 
-export const fetchAllMovies = async () => {
+export const fetchAllMovies = async (): Promise<AxiosResponse<any>> => {
   try {
-    const response = await instance.get(`/movies`);
+    const response = await instance.get<any>(`/movies`);
 
     return response;
   } catch (error: any) {
@@ -15,9 +14,9 @@ export const fetchAllMovies = async () => {
   }
 };
 
-export const fetchTrending = async () => {
+export const fetchTrending = async (): Promise<AxiosResponse<any>> => {
   try {
-    const response = await instance.get(`/movies/trending`);
+    const response = await instance.get<any>(`/movies/trending`);
 
     return response;
   } catch (error: any) {

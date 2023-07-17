@@ -16,6 +16,7 @@ const InputDataSchema = Yup.object().shape({
 
 const RegistrationForm: React.FC<IFormProps> = ({ submit }) => {
 
+
     const formik = useFormik<IFormValues>({
         initialValues: {
             name: "",
@@ -38,7 +39,7 @@ const RegistrationForm: React.FC<IFormProps> = ({ submit }) => {
         evt.preventDefault()
 
         submit({ name, email, password })
-
+       
     }
 
     return (<SC.FormContainer>

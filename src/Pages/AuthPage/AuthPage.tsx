@@ -7,12 +7,25 @@ import * as SC from './AuthPageStyled'
 import LoginForm from "components/LoginForm/LoginForm";
 import RegistrationForm from "components/RegistrationForm/RegistrationForm";
 import { IFormValues } from "interfaces/interfaces";
+import { useDispatch } from "react-redux";
+import { login, register } from "redux/auth/operations";
+
 
 const AuthPage: React.FC = () => {
     const location = useLocation()
+    const dispatch = useDispatch<any>()
+
 
     const handleSubmit = (data: IFormValues) => {
-        console.log(data);
+
+        if (data.name) {
+            dispatch(register(data))
+        } else {
+            dispatch(login({ email: data.email, password: data.password } as any))
+        }
+
+       
+
     }
 
     return (<SC.AuthContainer>
