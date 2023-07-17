@@ -1,7 +1,7 @@
 export interface IFormValues {
-    name: string,
-    email: string,
-    password: string,
+    name?: string,
+    email?: string,
+    password?: string,
 }
 
 export interface IFormProps {

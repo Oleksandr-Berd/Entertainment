@@ -21,7 +21,7 @@ const AuthPage: React.FC = () => {
 
 
         <LogoSvg width={36} />
-        {location.pathname === "/auth/login" ? <LoginForm /> : <RegistrationForm submit={handleSubmit} />}
+        {location.pathname === "/auth/login" ? <LoginForm submit={handleSubmit} /> : <RegistrationForm submit={handleSubmit} />}
     </SC.AuthContainer>);
 }
 
