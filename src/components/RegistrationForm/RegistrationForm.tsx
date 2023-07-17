@@ -1,9 +1,10 @@
 import * as Yup from "yup"
-import {useFormik} from "formik"
+import { useFormik } from "formik"
 
 import * as SC from "../LoginForm/LoginFormStyled"
 import { IFormValues } from "components/interfaces/interfaces"
 import { ChangeEvent } from "react"
+import { IFormProps } from '../interfaces/interfaces';
 
 const InputDataSchema = Yup.object().shape({
     name: Yup.string().min(2, "There is no such short name").required("Name is required"),
@@ -13,8 +14,8 @@ const InputDataSchema = Yup.object().shape({
 
 
 
-const RegistrationForm: React.FC = () => {
-    
+const RegistrationForm: React.FC<IFormProps> = ({ submit }) => {
+
     const formik = useFormik<IFormValues>({
         initialValues: {
             name: "",
@@ -27,14 +28,21 @@ const RegistrationForm: React.FC = () => {
         }
     })
 
-    
+    const { name, email, password } = formik.values
+
     const handleValueChange = (evt: ChangeEvent<HTMLInputElement>): void => {
-setTimeout(()=>{formik.handleChange(evt)}, 300)
+        setTimeout(() => { formik.handleChange(evt) }, 300)
     }
 
+    const handleSubmit = (evt: ChangeEvent<HTMLFormElement>): void => {
+        evt.preventDefault()
+
+        submit({ name, email, password })
+
+    }
 
     return (<SC.FormContainer>
-        <form>
+        <form onSubmit={handleSubmit}>
             <SC.TitleContainer>
                 <SC.Title>Sign Up</SC.Title>
             </SC.TitleContainer>
@@ -45,7 +53,7 @@ setTimeout(()=>{formik.handleChange(evt)}, 300)
                 {formik.errors.email ? <SC.ErrorStyled>{formik.errors.email}</SC.ErrorStyled> : <SC.ErrorStyled style={{ color: "transparent" }}>error</SC.ErrorStyled>}
                 <SC.StyledInput name="password" type="password" placeholder="Password" onChange={handleValueChange} />
                 {formik.errors.password ? <SC.ErrorStyled>{formik.errors.password}</SC.ErrorStyled> : <SC.ErrorStyled style={{ color: "transparent" }}>error</SC.ErrorStyled>}
-               
+
 
             </SC.InputContainer>
             <SC.StyledButton type="submit">Sign Up</SC.StyledButton>
