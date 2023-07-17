@@ -1,16 +1,50 @@
+import * as Yup from "yup"
+import {useFormik} from "formik"
 
 import * as SC from "../LoginForm/LoginFormStyled"
+import { IFormValues } from "components/interfaces/interfaces"
+import { ChangeEvent } from "react"
 
-const RegistrationForm:React.FC = () => {
+const InputDataSchema = Yup.object().shape({
+    name: Yup.string().min(2, "There is no such short name").required("Name is required"),
+    email: Yup.string().email().required("Email is required"),
+    password: Yup.string().min(6, "Password length must be at least six chars").required("Password is required")
+})
+
+
+
+const RegistrationForm: React.FC = () => {
+    
+    const formik = useFormik<IFormValues>({
+        initialValues: {
+            name: "",
+            email: "",
+            password: "",
+        },
+        validationSchema: InputDataSchema,
+        onSubmit: (values) => {
+            console.log(values)
+        }
+    })
+
+    
+    const handleValueChange = (evt: ChangeEvent<HTMLInputElement>): void => {
+setTimeout(()=>{formik.handleChange(evt)}, 300)
+    }
+
+
     return (<SC.FormContainer>
         <form>
             <SC.TitleContainer>
                 <SC.Title>Sign Up</SC.Title>
             </SC.TitleContainer>
             <SC.InputContainer>
-                <SC.StyledInput type="text" placeholder="Username" />
-                <SC.StyledInput type="email" placeholder="Email address" />
-                <SC.StyledInput type="password" placeholder="Password" />
+                <SC.StyledInput name="name" type="text" placeholder="Username" onChange={handleValueChange} />
+                {formik.errors.name ? <SC.ErrorStyled>{formik.errors.name}</SC.ErrorStyled> : <SC.ErrorStyled style={{ color: "transparent" }}>error</SC.ErrorStyled>}
+                <SC.StyledInput name="email" type="email" placeholder="Email address" onChange={handleValueChange} />
+                {formik.errors.email ? <SC.ErrorStyled>{formik.errors.email}</SC.ErrorStyled> : <SC.ErrorStyled style={{ color: "transparent" }}>error</SC.ErrorStyled>}
+                <SC.StyledInput name="password" type="password" placeholder="Password" onChange={handleValueChange} />
+                {formik.errors.password ? <SC.ErrorStyled>{formik.errors.password}</SC.ErrorStyled> : <SC.ErrorStyled style={{ color: "transparent" }}>error</SC.ErrorStyled>}
                
 
             </SC.InputContainer>

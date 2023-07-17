@@ -37,15 +37,9 @@ export const StyledInput = styled.input`
   padding-left: ${(props) => props.theme.space[4]};
   padding-bottom: ${(props) => props.theme.space[5]};
 
-  &:not(:last-child) {
-    margin-bottom: ${(props) => props.theme.space[7]};
-  }
-
-  &:last-child {
-    margin-bottom: ${(props) => props.theme.space[11]};
-  }
 
   background-color: transparent;
+  color: ${props => props.theme.color.white};
 
   border: none;
 
@@ -97,5 +91,19 @@ export const StyledLink = styled(NavLink)`
   &:hover {
     color: ${(props) => props.theme.color.red};
     transition: color 0.3s ease-in-out;
+  }
+`;
+
+export const ErrorStyled = styled.span`
+margin-top: ${props => props.theme.space[2]};
+
+color: ${props => props.theme.color.red};
+
+  &:not(:last-child) {
+    margin-bottom: ${(props) => props.theme.space[7]};
+  }
+
+  &:last-child {
+    margin-bottom: ${(props) => props.theme.space[11]};
   }
 `;
