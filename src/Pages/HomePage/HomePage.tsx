@@ -10,44 +10,20 @@ import SearchPage from 'Pages/SearchPage/SearchPage';
 import { DataArray } from 'interfaces/interfaces';
 
 
-const HomePage = (): JSX.Element => {
-    const [isLoading, setIsLoading] = useState<Boolean>(false)
-    const [isError, setIsError] = useState<null | string>(null)
-    const [data, setData] = useState<DataArray[]>([])
-    const [trending, setTrending] = useState<DataArray[]>([])
+interface IProps {
+    data: DataArray[],
+    isLoading: Boolean,
+    trending: DataArray[],
+    isError: null | string
+}
+
+const HomePage: React.FC<IProps> = ({ data, isLoading, trending, isError }): JSX.Element => {
+ 
     const [searchData, setSearchData] = useState<DataArray[] | null>([])
     const [searchFilter, setSearchFilter] = useState("")
 
 
 
-    const getAllMovies = async () => {
-        setIsLoading(true)
-        try {
-            const result = await fetchAllMovies()
-            setData(result.data)
-        } catch (error) {
-            setIsError(error as string)
-        } finally {
-            setIsLoading(false)
-        }
-
-    }
-
-    const getTrending = async () => {
-        setIsLoading(true)
-        try {
-            const result = await fetchTrending()
-            setTrending(result.data.result)
-        } catch (error) {
-            setIsError(error as string)
-        } finally {
-            setIsLoading(false)
-        }
-    }
-    useEffect(() => {
-        getAllMovies()
-        getTrending()
-    }, [])
 
     const getSearchData = (filter: string): void => {
 
