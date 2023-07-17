@@ -4,12 +4,16 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 axios.defaults.baseURL =
   "https://common-server-ldx7.onrender.com/api/entertainment";
 
-const setAuthHeader = (token:any) => {
-  axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+axios.defaults.headers.common.Authorization =
+  "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0YjU1MmY5ODFhOWNlZDNmYzk3MzgwOSIsImlhdCI6MTY4OTYwNTc3NCwiZXhwIjoxNjg5NjkyMTc0fQ.78un_bmI5yvlogkLNuc-nzNoVbVWOa0UI2JRlQOZ_-M";
+
+const setAuthHeader = (token: any) => {
+    
+ axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
 
 const clearAuthHeader = () => {
-  axios.defaults.headers.common.Authorization = "";
+  axios.defaults.headers.common["Authorization"] = "";
 };
 
 
@@ -18,6 +22,9 @@ export const register:any = createAsyncThunk(
   async (credentials, thunkAPI) => {
     try {
         const res = await axios.post("/auth/register", credentials);
+
+        
+        setAuthHeader(res.data.token);
         
       return res.data;
     } catch (error:any) {
@@ -31,22 +38,21 @@ export const login:any = createAsyncThunk(
   "auth/login",
   async (credentials, thunkAPI) => {
     try {
-      const res = await axios.post("/auth/login", credentials);
-        setAuthHeader(res.data.token);
+        const res = await axios.post("/auth/login", credentials);
         
+        setAuthHeader(res.data.token)
       return res.data;
-    } catch (error:any) {
+    } catch (error: any) {
       return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
 
 
-export const logOut = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
-  try {
-    await axios.post("/users/logout");
-    // After a successful logout, remove the token from the HTTP header
-    clearAuthHeader();
+export const logout:any = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
+    try {
+      
+    await axios.post("/auth/logout");
   } catch (error:any) {
     return thunkAPI.rejectWithValue(error.message);
   }

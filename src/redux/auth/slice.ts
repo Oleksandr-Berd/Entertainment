@@ -1,38 +1,20 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { register, login, logOut, refreshUser } from "./operations";
-
-interface User {
-  name: string | null;
-  email: string | null;
-}
-
-interface AuthState {
-  user: User;
-  token: string | null;
-  isLoggedIn: boolean;
-  isRefreshing: boolean;
-}
-
-
+import { register, login, logout, refreshUser } from "./operations";
 
 const authSlice = createSlice({
   name: "auth",
   initialState: {
-  user: { name: null, email: null },
-  token: null,
-  isLoggedIn: false,
-  isRefreshing: false,
-},
+    user: { name: null, email: null, bookmarked:null, avatarUrl: null },
+    token: null,
+    isLoggedIn: false,
+    isRefreshing: false,
+  },
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(register.pending, (state, action: PayloadAction<any>) => {
-        
-      })
-        .addCase(register.fulfilled, (state, action: PayloadAction<any>) => {
-          const { name, email } = action.payload;
-          state.user = {name:name, email:email };
-
+      .addCase(register.pending, (state, action: PayloadAction<any>) => {})
+      .addCase(register.fulfilled, (state, action: PayloadAction<any>) => {
+        state.user = action.payload;
       })
       .addCase(register.rejected, (state, action: PayloadAction<any>) => {
         return state;
@@ -42,17 +24,22 @@ const authSlice = createSlice({
         return state;
       })
       .addCase(login.fulfilled, (state, action: PayloadAction<any>) => {
-        state.user.name = action.payload.name;
-        state.user.email = action.payload.email;
-        state.token = action.payload.token;
-        state.isLoggedIn = true;
+        const { name, email, token, avatarUrl, bookmarked } = action.payload;
+        state.token = token;
+          state.user = {
+            name: name,
+            email: email,
+            avatarUrl: avatarUrl,
+            bookmarked: bookmarked,
+          };
+          state.isLoggedIn = true;
       })
       .addCase(login.rejected, (state, action: PayloadAction<any>) => {
         return state;
       })
 
-      .addCase(logOut.fulfilled, (state) => {
-        state.user = { name: null, email: null };
+      .addCase(logout.fulfilled, (state) => {
+        state.user = { name: null, email: null, avatarUrl: null, bookmarked: null };
         state.token = null;
         state.isLoggedIn = false;
       })
