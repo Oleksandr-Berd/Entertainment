@@ -4,17 +4,19 @@ import { register, login, logout, refreshUser } from "./operations";
 const authSlice = createSlice({
   name: "auth",
   initialState: {
-    user: { name: null, email: null, bookmarked:null, avatarUrl: null },
-    token: null,
+    user: { name: null, email: null, bookmarked:null, avatarUrl: null,  },
+      token: null,
+    error:null,
     isLoggedIn: false,
     isRefreshing: false,
   },
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(register.pending, (state, action: PayloadAction<any>) => {})
+      .addCase(register.pending, (state, action: PayloadAction<any>) => state)
       .addCase(register.fulfilled, (state, action: PayloadAction<any>) => {
-        state.user = action.payload;
+          state.user = action.payload;
+          state.isLoggedIn = true
       })
       .addCase(register.rejected, (state, action: PayloadAction<any>) => {
         return state;
@@ -35,7 +37,8 @@ const authSlice = createSlice({
           state.isLoggedIn = true;
       })
       .addCase(login.rejected, (state, action: PayloadAction<any>) => {
-        return state;
+        state.error = action.payload
+        
       })
 
       .addCase(logout.fulfilled, (state) => {

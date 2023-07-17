@@ -5,7 +5,7 @@ axios.defaults.baseURL =
   "https://common-server-ldx7.onrender.com/api/entertainment";
 
 axios.defaults.headers.common.Authorization =
-  "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0YjU1MmY5ODFhOWNlZDNmYzk3MzgwOSIsImlhdCI6MTY4OTYwNTc3NCwiZXhwIjoxNjg5NjkyMTc0fQ.78un_bmI5yvlogkLNuc-nzNoVbVWOa0UI2JRlQOZ_-M";
+  "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0YjU1MmY5ODFhOWNlZDNmYzk3MzgwOSIsImlhdCI6MTY4OTYwNjAzMywiZXhwIjoxNjg5NjkyNDMzfQ.IZliZIfpN06WDNQJywZAMc4TNaZ5dd90fGVHulIuW8s";
 
 const setAuthHeader = (token: any) => {
     

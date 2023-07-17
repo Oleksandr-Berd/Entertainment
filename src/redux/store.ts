@@ -16,6 +16,7 @@ const middleware = [
   ...getDefaultMiddleware({
     serializableCheck: {
       ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+    
     },
   }),
 ];
@@ -24,6 +25,7 @@ const middleware = [
 const authPersistConfig = {
   key: "auth",
   storage,
+  blacklist:["isError"]
 };
 
 export const store = configureStore({

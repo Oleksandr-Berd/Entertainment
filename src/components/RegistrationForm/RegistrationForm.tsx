@@ -5,6 +5,7 @@ import * as SC from "../LoginForm/LoginFormStyled"
 import { IFormValues } from "interfaces/interfaces"
 import { ChangeEvent } from "react"
 import { IFormProps } from '../../interfaces/interfaces';
+import { useNavigate } from "react-router"
 
 const InputDataSchema = Yup.object().shape({
     name: Yup.string().min(2, "There is no such short name").required("Name is required"),
@@ -15,7 +16,7 @@ const InputDataSchema = Yup.object().shape({
 
 
 const RegistrationForm: React.FC<IFormProps> = ({ submit }) => {
-
+    const navigate = useNavigate()
 
     const formik = useFormik<IFormValues>({
         initialValues: {
@@ -39,7 +40,7 @@ const RegistrationForm: React.FC<IFormProps> = ({ submit }) => {
         evt.preventDefault()
 
         submit({ name, email, password })
-       
+        navigate("/")
     }
 
     return (<SC.FormContainer>
