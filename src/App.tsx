@@ -69,7 +69,7 @@ const App = ():JSX.Element => {
       <Routes>
         <Route path="/" element={<SharedLayout />}>
           <Route index element={<HomePage data={data} isLoading={isLoading} isError={isError} trending={trending} />}/>
-          <Route path='/movies' element={<MoviesPage />}/>
+          <Route path='/movies' element={<MoviesPage data={data} isError={isError} />}/>
           <Route path='/tv' element={<TVPage />} />
           <Route path='/bookmarked' element={<Bookmarked data={isLoggedIn ? data : "Please Login" } />} />
         </Route>

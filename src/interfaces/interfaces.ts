@@ -4,6 +4,11 @@ export interface IFormValues {
     password?: string,
 }
 
+
+export interface IDataProps{
+  data: DataArray[],
+  isError?: null | string
+}
 export interface IFormProps {
     submit: (data: IFormValues) => void;
 }
