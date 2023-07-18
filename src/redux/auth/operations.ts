@@ -1,11 +1,10 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { useAuthHeader } from "hooks/useAuthHeader";
 
 axios.defaults.baseURL =
   "https://common-server-ldx7.onrender.com/api/entertainment";
 
-axios.defaults.headers.common.Authorization =
-  "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0YjY0MTQ0NGJjN2Y1ZGY1ZGQ3ZjBmNCIsImlhdCI6MTY4OTY2NTg3MCwiZXhwIjoxNjg5NzUyMjcwfQ.2J_Ke5UKQA-7wQsn6n7BlMlSyp8BjEOuDMIlABTfreg";
 
 const setAuthHeader = (token: any) => {
     
@@ -17,14 +16,17 @@ const clearAuthHeader = () => {
 };
 
 
+
+
 export const register:any = createAsyncThunk(
   "auth/register",
-  async (credentials, thunkAPI) => {
+    async (credentials, thunkAPI) => {
+     
     try {
         const res = await axios.post("/auth/register", credentials);
-
+ const { authHeader } = useAuthHeader(res.data.token);
         
-        setAuthHeader(res.data.token);
+        setAuthHeader(authHeader);
         
       return res.data;
     } catch (error:any) {
@@ -52,7 +54,10 @@ export const login:any = createAsyncThunk(
 export const logout:any = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
     try {
       
-    await axios.post("/auth/logout");
+        await axios.post("/auth/logout");
+        
+clearAuthHeader()
+
   } catch (error:any) {
     return thunkAPI.rejectWithValue(error.message);
   }
@@ -80,26 +85,27 @@ export const refreshUser:any = createAsyncThunk(
 );
 
 export const changeBookmarked: any = createAsyncThunk(
-  "auth/bookmarked",
-  async (credentials, thunkAPI) => {
-    try {
-       const res = await axios.patch("auth/bookmarked", credentials);
+    "auth/bookmarked",
+    async (credentials, thunkAPI) => {
+        try {
+            const res = await axios.patch("auth/bookmarked", credentials);
         
-        return res.data
-    } catch (error: any) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  }
+            return res.data
+        } catch (error: any) {
+            return thunkAPI.rejectWithValue(error.message);
+        }
+    })
 
   export const addAvatar: any = createAsyncThunk(
-  "auth/bookmarked",
-  async (credentials, thunkAPI) => {
-    try {
-       const res = await axios.patch("auth/bookmarked", credentials);
-        
-        return res.data
-    } catch (error: any) {
-      return thunkAPI.rejectWithValue(error.message);
+    "auth/avatars",
+    async (credentials, thunkAPI) => {
+      try {
+        const res = await axios.patch("auth/avatars", credentials);
+console.log(res);
+
+        return res.data;
+      } catch (error: any) {
+        return thunkAPI.rejectWithValue(error.message);
+      }
     }
-  }
-);
+  );

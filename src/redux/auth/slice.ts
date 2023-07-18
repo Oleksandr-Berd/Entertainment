@@ -5,6 +5,7 @@ import {
   logout,
   refreshUser,
   changeBookmarked,
+  addAvatar,
 } from "./operations";
 
 interface State {
@@ -92,7 +93,13 @@ const authSlice = createSlice({
           const { bookmarked } = state.user;
           bookmarked.push(title);
         }
-      );
+    )
+        .addCase(addAvatar.fulfilled, (state, action: PayloadAction<any>) => {
+            console.log(action.payload);
+            
+            state.user.avatarUrl = action.payload
+        }
+        )
   },
 });
 

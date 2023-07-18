@@ -9,7 +9,7 @@ import { fetchAllMovies, fetchTrending } from 'utilities/services';
 import { DataArray } from 'interfaces/interfaces';
 import { useAuth } from 'hooks';
 import { useDispatch } from 'react-redux';
-import { refreshUser } from 'redux/auth/operations';
+import { addAvatar, refreshUser } from 'redux/auth/operations';
 import UserPage from 'Pages/UserPage/UserPage';
 
 const HomePage = lazy(() => import('Pages/HomePage/HomePage'))
@@ -67,14 +67,9 @@ const App = ():JSX.Element => {
 
   let bookmarkedMovies: any = data.filter(({ title }) => bookmarked.includes(title))
   let movies: any = data.filter(({ category }) => category === "Movie")
-  let tvSeries: any = data.filter(({ category }) => category === "TV Series")
+  let tvSeries: any = data.filter(({ category }) => category === "TV Series");
 
-  const submitAvatar = (avatar:any) => {
-    
-
-    console.log(avatar);
-
-  }
+ 
 
   return (
     <div className="App">
@@ -89,7 +84,7 @@ const App = ():JSX.Element => {
         <Route path="auth" element={<AuthLayout />}>
           <Route path='/auth/login' element={<AuthPage />} />
           <Route path='/auth/registration' element={<AuthPage />} />
-          <Route path='/auth/user' element={<UserPage name={user.name} email={user.email} submit={submitAvatar} /> } />
+          <Route path='/auth/user' element={<UserPage name={user.name} email={user.email} /> } />
         </Route>
         <Route path='*' element={<NotFound/>} />
       </Routes>
