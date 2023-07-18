@@ -69,6 +69,12 @@ const App = ():JSX.Element => {
   let movies: any = data.filter(({ category }) => category === "Movie")
   let tvSeries: any = data.filter(({ category }) => category === "TV Series")
 
+  const submitAvatar = (avatar:any) => {
+    
+
+    console.log(avatar);
+
+  }
 
   return (
     <div className="App">
@@ -83,7 +89,7 @@ const App = ():JSX.Element => {
         <Route path="auth" element={<AuthLayout />}>
           <Route path='/auth/login' element={<AuthPage />} />
           <Route path='/auth/registration' element={<AuthPage />} />
-          <Route path='/auth/user' element={<UserPage name={user.name} email={user.email} /> } />
+          <Route path='/auth/user' element={<UserPage name={user.name} email={user.email} submit={submitAvatar} /> } />
         </Route>
         <Route path='*' element={<NotFound/>} />
       </Routes>

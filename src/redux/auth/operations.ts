@@ -90,4 +90,16 @@ export const changeBookmarked: any = createAsyncThunk(
       return thunkAPI.rejectWithValue(error.message);
     }
   }
+
+  export const addAvatar: any = createAsyncThunk(
+  "auth/bookmarked",
+  async (credentials, thunkAPI) => {
+    try {
+       const res = await axios.patch("auth/bookmarked", credentials);
+        
+        return res.data
+    } catch (error: any) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
 );
