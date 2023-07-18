@@ -40,7 +40,7 @@ const RegistrationForm: React.FC<IFormProps> = ({ submit }) => {
         evt.preventDefault()
 
         submit({ name, email, password })
-        navigate("/")
+        navigate("/auth/login")
     }
 
     return (<SC.FormContainer>

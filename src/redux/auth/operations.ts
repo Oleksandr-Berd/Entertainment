@@ -5,7 +5,7 @@ axios.defaults.baseURL =
   "https://common-server-ldx7.onrender.com/api/entertainment";
 
 axios.defaults.headers.common.Authorization =
-  "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0YjYyN2M0YTYxYjM2MGMzOGUzNjRiMSIsImlhdCI6MTY4OTY2MDgzMiwiZXhwIjoxNjg5NzQ3MjMyfQ.Qjtg_eiEFIySrzA8HevqTGWgeAnKrfiZRXNOGg1iuKg";
+  "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0YjY0MTQ0NGJjN2Y1ZGY1ZGQ3ZjBmNCIsImlhdCI6MTY4OTY2NTg3MCwiZXhwIjoxNjg5NzUyMjcwfQ.2J_Ke5UKQA-7wQsn6n7BlMlSyp8BjEOuDMIlABTfreg";
 
 const setAuthHeader = (token: any) => {
     
@@ -58,28 +58,35 @@ export const logout:any = createAsyncThunk("auth/logout", async (_, thunkAPI) =>
   }
 });
 
-/*
- * GET @ /users/current
- * headers: Authorization: Bearer token
- */
+
 export const refreshUser:any = createAsyncThunk(
   "auth/current",
   async (_, thunkAPI) => {
-    // Reading the token from the state via getState()
     const state:any = thunkAPI.getState();
     const persistedToken = state.auth.token;
 
     if (persistedToken === null) {
-      // If there is no token, exit without performing any request
       return thunkAPI.rejectWithValue("Unable to fetch user");
     }
 
     try {
-      // If there is a token, add it to the HTTP header and perform the request
       setAuthHeader(persistedToken);
       const res = await axios.get("auth/current");
       return res.data;
     } catch (error:any) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const bookmarked: any = createAsyncThunk(
+  "auth/bookmarked",
+  async (credentials, thunkAPI) => {
+    try {
+       const res = await axios.patch("auth/bookmarked", credentials);
+        
+        return res.data
+    } catch (error: any) {
       return thunkAPI.rejectWithValue(error.message);
     }
   }
