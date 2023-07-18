@@ -14,7 +14,7 @@ const MoviesPage: React.FC<IDataProps> = ({ data, isError }): JSX.Element => {
     const [searchFilter, setSearchFilter] = useState<string>("")
 
 
-const placeholer = "Search for movies"
+    const placeholder = "Search for movies"
 
     const getSearchData = (filter: string): void => {
 
@@ -37,7 +37,7 @@ const placeholer = "Search for movies"
     
     return (
         <SCMovie.PageContainer>
-            <Search submitSearch={getSearchData} placeholder={placeholer} />
+            <Search submitSearch={getSearchData} placeholder={placeholder} />
             {!!searchData && searchData.length > 0 ? <SearchPage searchMovie={searchData} searchFilter={searchFilter} /> : searchData === null ? <SearchPage searchMovie={searchData} searchFilter={searchFilter} /> :
                 <> <SCMovie.Title>Movies</SCMovie.Title>
                 <SC.AllMoviesList>

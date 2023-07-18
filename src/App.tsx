@@ -62,7 +62,8 @@ const App = ():JSX.Element => {
     getTrending()
   }, [])
 
-const movies = data.filter(({category}) => category === "Movie")
+  const movies = data.filter(({ category }) => category === "Movie")
+  const tvSeries = data.filter(({ category }) => category === "TV Series")
 
   return (
     <div className="App">
@@ -71,7 +72,7 @@ const movies = data.filter(({category}) => category === "Movie")
         <Route path="/" element={<SharedLayout />}>
           <Route index element={<HomePage data={data} isLoading={isLoading} isError={isError} trending={trending} />}/>
           <Route path='/movies' element={<MoviesPage data={movies} isError={isError} />}/>
-          <Route path='/tv' element={<TVPage />} />
+          <Route path='/tv' element={<TVPage data={tvSeries } />} />
           <Route path='/bookmarked' element={<Bookmarked data={isLoggedIn ? data : "Please Login" } />} />
         </Route>
         <Route path="auth" element={<AuthLayout />}>
