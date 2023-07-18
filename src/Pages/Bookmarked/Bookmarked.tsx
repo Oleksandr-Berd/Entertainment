@@ -1,23 +1,56 @@
-import { useAuth } from "hooks";
 
-interface IProps {
-    data: any
+import { useState } from "react";
+import * as SC from "../../components/AllMovies/AllMoviesStyled"
+import * as SCMovie from "../MoviesPage/MoviesPageStyled"
+
+import AllMoviesItem from "components/AllMovies/AllMoviesItem";
+import { DataArray } from "interfaces/interfaces";
+import Search from "components/Search/Search";
+import SearchPage from "Pages/SearchPage/SearchPage";
+
+
+const BookmarkedPage: React.FC<any> = ({ data, isError }): JSX.Element => {
+
+    const [searchData, setSearchData] = useState<DataArray[] | null>([])
+    const [searchFilter, setSearchFilter] = useState<string>("")
+
+
+    const placeholder = "Search for bookmarked shows"
+
+    const getSearchData = (filter: string): void => {
+
+        if (filter.length >= 3) {
+            const filterData = data.filter(({ title }:any) => {
+
+
+                return title.toLowerCase().includes(filter)
+            }
+            )
+            setSearchData(filterData.length > 0 ? filterData : null)
+
+            setSearchFilter(filter)
+        } else {
+            setSearchData([])
+        }
+
+
+    }
+
+    return (
+        <SCMovie.PageContainer>
+            {typeof data === "string" ? <h1>{data}</h1> : <>
+                <Search submitSearch={getSearchData} placeholder={placeholder} />
+                {!!searchData && searchData.length > 0 ? <SearchPage searchMovie={searchData} searchFilter={searchFilter} /> : searchData === null ? <SearchPage searchMovie={searchData} searchFilter={searchFilter} /> :
+                    <> <SCMovie.Title>Bookmarked Movies</SCMovie.Title>
+                        <SC.AllMoviesList>
+                            {!!data ? data.map(({ _id, title, thumbnail, year, category, rating, isBookmarked }: any) => <AllMoviesItem key={_id} title={title} thumbnail={thumbnail} year={year} category={category} rating={rating} isBookmarked={isBookmarked}></AllMoviesItem>) : <h1>{isError}</h1>}
+                        </SC.AllMoviesList>
+                    </>}
+            </>}
+            
+
+        </SCMovie.PageContainer >
+    );
 }
 
-const Bookmarked: React.FC<IProps> = ({ data }): JSX.Element => {
-    const {user} = useAuth()
-    
-
-
-    return (<div>{typeof data === "string" ? <h1>{data}</h1> :
-    
-        data.filter(({ title }: any) => user.bookmarked.includes(title)).map(({ _id, title, thumbnail, year, category, rating }: any) => <li key={_id}>
-            <p>{title}</p>
-            <p>{year}</p>
-            <p>{category}</p>
-            <p>{rating }</p>
-        </li>)
-    }</div>);
-}
- 
-export default Bookmarked;
+export default BookmarkedPage;

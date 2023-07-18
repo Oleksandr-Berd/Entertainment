@@ -9,6 +9,8 @@ margin-bottom: 26px;
 `
 
 export const SearchInput = styled.input`
+min-width: ${props => props.theme.percentage[8]};
+
 margin-left: ${props => props.theme.space[4]};
 
 font-size: ${props => props.theme.size.N};

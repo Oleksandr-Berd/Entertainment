@@ -25,7 +25,7 @@ const App = ():JSX.Element => {
   const [isError, setIsError] = useState<null | string>(null)
   const [data, setData] = useState<DataArray[]>([])
   const [trending, setTrending] = useState<DataArray[]>([])
-  const {isLoggedIn} = useAuth()
+  const {isLoggedIn, user} = useAuth()
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -62,6 +62,9 @@ const App = ():JSX.Element => {
     getTrending()
   }, [])
 
+  const { bookmarked } = user;
+
+  const bookmarkedMovies = data.filter(({title}) => bookmarked.includes(title))
   const movies = data.filter(({ category }) => category === "Movie")
   const tvSeries = data.filter(({ category }) => category === "TV Series")
 
@@ -73,7 +76,7 @@ const App = ():JSX.Element => {
           <Route index element={<HomePage data={data} isLoading={isLoading} isError={isError} trending={trending} />}/>
           <Route path='/movies' element={<MoviesPage data={movies} isError={isError} />}/>
           <Route path='/tv' element={<TVPage data={tvSeries } />} />
-          <Route path='/bookmarked' element={<Bookmarked data={isLoggedIn ? data : "Please Login" } />} />
+          <Route path='/bookmarked' element={<Bookmarked data={isLoggedIn ? bookmarkedMovies : "Please Login" }/>} />
         </Route>
         <Route path="auth" element={<AuthLayout />}>
           <Route path='/auth/login' element={<AuthPage />} />
