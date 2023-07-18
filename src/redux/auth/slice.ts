@@ -1,5 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { register, login, logout, refreshUser, bookmarked } from './operations';
+import {
+  register,
+  login,
+  logout,
+  refreshUser,
+  changeBookmarked,
+} from "./operations";
 
 interface State {
     user: User,
@@ -71,8 +77,7 @@ const authSlice = createSlice({
       .addCase(refreshUser.pending, (state) => {
         state.isRefreshing = true;
       })
-        .addCase(refreshUser.fulfilled, (state, action: PayloadAction<any>) => {
-          
+      .addCase(refreshUser.fulfilled, (state, action: PayloadAction<any>) => {
         state.user = action.payload;
         state.isLoggedIn = true;
         state.isRefreshing = false;
@@ -80,12 +85,14 @@ const authSlice = createSlice({
       .addCase(refreshUser.rejected, (state) => {
         state.isRefreshing = false;
       })
-        .addCase(bookmarked.fulfilled, (state, action: PayloadAction<any>) => {
-            
-        const { title } = action.payload;
-            const { bookmarked } = state.user;            
-        bookmarked.push(title);
-      });
+      .addCase(
+        changeBookmarked.fulfilled,
+        (state, action: PayloadAction<any>) => {
+          const { title } = action.payload;
+          const { bookmarked } = state.user;
+          bookmarked.push(title);
+        }
+      );
   },
 });
 

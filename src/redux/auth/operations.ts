@@ -79,7 +79,7 @@ export const refreshUser:any = createAsyncThunk(
   }
 );
 
-export const bookmarked: any = createAsyncThunk(
+export const changeBookmarked: any = createAsyncThunk(
   "auth/bookmarked",
   async (credentials, thunkAPI) => {
     try {

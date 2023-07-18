@@ -6,12 +6,15 @@ import AllMoviesItem from "components/AllMovies/AllMoviesItem";
 import { DataArray, IDataProps } from "interfaces/interfaces";
 import Search from "components/Search/Search";
 import SearchPage from "Pages/SearchPage/SearchPage";
+import { useAuth } from "hooks";
 
 
 const TVPage: React.FC<IDataProps> = ({ data, isError }): JSX.Element => {
 
     const [searchData, setSearchData] = useState<DataArray[] | null>([])
     const [searchFilter, setSearchFilter] = useState<string>("")
+    const { user } = useAuth()
+    const { bookmarked } = user;
 
 
     const placeholder = "Search for TV series"
@@ -41,7 +44,7 @@ const TVPage: React.FC<IDataProps> = ({ data, isError }): JSX.Element => {
             {!!searchData && searchData.length > 0 ? <SearchPage searchMovie={searchData} searchFilter={searchFilter} /> : searchData === null ? <SearchPage searchMovie={searchData} searchFilter={searchFilter} /> :
                 <> <SCMovie.Title>TV series</SCMovie.Title>
                     <SC.AllMoviesList>
-                        {!!data ? data.map(({ _id, title, thumbnail, year, category, rating, isBookmarked }: any) => <AllMoviesItem key={_id} title={title} thumbnail={thumbnail} year={year} category={category} rating={rating} isBookmarked={isBookmarked}></AllMoviesItem>) : <h1>{isError}</h1>}
+                        {!!data ? data.map(({ _id, title, thumbnail, year, category, rating, isBookmarked }: any) => <AllMoviesItem key={_id} title={title} thumbnail={thumbnail} year={year} category={category} rating={rating} isBookmarked={bookmarked.includes(title)}></AllMoviesItem>) : <h1>{isError}</h1>}
                     </SC.AllMoviesList>
                 </>}
 

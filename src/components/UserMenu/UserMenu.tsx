@@ -5,6 +5,7 @@ import * as SC from "./UserMenuStyled"
 import { useAuth } from "hooks";
 import { useDispatch } from "react-redux";
 import { logout } from "redux/auth/operations";
+import { NavLink } from 'react-router-dom';
 
 const UserMenu:React.FC = () => {
 
@@ -19,7 +20,10 @@ dispatch(logout())
     }
     
     return (<SC.CommonContainer>
-        <SC.Avatar src={avatarUrl} alt={name} />
+        <NavLink to="/auth/user">
+            <SC.Avatar src={avatarUrl} alt={name} />
+        </NavLink>
+        
         <SC.ButtonLogout onClick={handleClick}><IoMdLogOut size={24} fill='white'/></SC.ButtonLogout>
     </SC.CommonContainer>
        );
