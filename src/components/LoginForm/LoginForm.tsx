@@ -3,7 +3,7 @@ import * as Yup from 'yup';
 import * as SC from "./LoginFormStyled"
 import { useFormik } from 'formik';
 import { IFormProps, IFormValues } from 'interfaces/interfaces';
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { ChangeEvent, FormEvent } from 'react';
 import { useNavigate } from 'react-router';
 
 const InputValidationSchema = Yup.object().shape({

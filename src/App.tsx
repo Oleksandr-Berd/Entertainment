@@ -1,6 +1,6 @@
 import React, { lazy, useEffect, useState } from 'react';
 
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 
 import { GlobalStyles } from './utilities/GlobalStyles';
 import SharedLayout from './components/SharedLayout/SharedLayout';
@@ -62,6 +62,7 @@ const App = ():JSX.Element => {
     getTrending()
   }, [])
 
+const movies = data.filter(({category}) => category === "Movie")
 
   return (
     <div className="App">
@@ -69,7 +70,7 @@ const App = ():JSX.Element => {
       <Routes>
         <Route path="/" element={<SharedLayout />}>
           <Route index element={<HomePage data={data} isLoading={isLoading} isError={isError} trending={trending} />}/>
-          <Route path='/movies' element={<MoviesPage data={data} isError={isError} />}/>
+          <Route path='/movies' element={<MoviesPage data={movies} isError={isError} />}/>
           <Route path='/tv' element={<TVPage />} />
           <Route path='/bookmarked' element={<Bookmarked data={isLoggedIn ? data : "Please Login" } />} />
         </Route>

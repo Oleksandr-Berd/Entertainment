@@ -1,5 +1,4 @@
-import { useEffect, useState } from 'react';
-import { fetchAllMovies, fetchTrending } from 'utilities/services';
+import { useState } from 'react';
 import AllMovies from '../../components/AllMovies/AllMovies';
 import { Dna } from 'react-loader-spinner';
 
@@ -22,7 +21,7 @@ const HomePage: React.FC<IProps> = ({ data, isLoading, trending, isError }): JSX
     const [searchData, setSearchData] = useState<DataArray[] | null>([])
     const [searchFilter, setSearchFilter] = useState("")
 
-
+    const placeholder = "Search for movies or TV series"
 
 
     const getSearchData = (filter: string): void => {
@@ -46,7 +45,7 @@ const HomePage: React.FC<IProps> = ({ data, isLoading, trending, isError }): JSX
 
     return (
         <SC.CommonContainer>
-            <Search submitSearch={getSearchData} />
+            <Search submitSearch={getSearchData} placeholder={placeholder } />
             {!!searchData && searchData.length > 0 ? <SearchPage searchMovie={searchData} searchFilter={searchFilter} /> : searchData === null ? <SearchPage searchMovie={searchData} searchFilter={searchFilter} /> : <><SC.Title>Trending</SC.Title>
                 {isLoading ? <Dna
                     visible={true}

@@ -4,10 +4,11 @@ import { BiSearchAlt } from 'react-icons/bi';
 import * as SC from "./SearchStyled"
 
 interface ISearchProps {
-   submitSearch: (filter:string) => void
+    submitSearch: (filter: string) => void
+    placeholder: string,
 }
 
-const Search: React.FC<ISearchProps> = ({ submitSearch } ) => {
+const Search: React.FC<ISearchProps> = ({ submitSearch, placeholder } ) => {
     
     const [filter, setFilter] = useState<string >("")
 
@@ -32,7 +33,7 @@ const Search: React.FC<ISearchProps> = ({ submitSearch } ) => {
         <div>
             <BiSearchAlt size={18} />
         </div>
-        <SC.SearchInput type="text" onChange={handleChange} placeholder="Search for movies or TV series"/>
+        <SC.SearchInput type="text" onChange={handleChange} placeholder={placeholder } />
     </SC.CommonContainer> );
 }
  
