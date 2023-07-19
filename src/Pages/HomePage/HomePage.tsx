@@ -46,6 +46,7 @@ const HomePage: React.FC<IProps> = ({ data, isLoading, trending, isError }): JSX
 
     return (
         <SC.CommonContainer>
+            {isError ? <h1>{isError}</h1> : null}
             <Search submitSearch={getSearchData} placeholder={placeholder } />
             {!!searchData && searchData.length > 0 ? <SearchPage searchMovie={searchData} searchFilter={searchFilter} /> : searchData === null ? <SearchPage searchMovie={searchData} searchFilter={searchFilter} /> : <><SC.Title>Trending</SC.Title>
                 {isLoading ? <Dna
