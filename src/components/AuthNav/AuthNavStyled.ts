@@ -9,6 +9,10 @@ align-items: center;
 export const AuthNavItem = styled.li`
   &:not(:last-child) {
     margin-right: ${(props) => props.theme.space[2]};
+
+    @media (min-width: 768px) {
+      margin-right: ${(props) => props.theme.space[6]};
+    }
   }
 `;
 
@@ -22,5 +26,9 @@ export const AuthNavLink = styled(NavLink)`
   &:hover {
     color: ${(props) => props.theme.color.red};
     transition: color 0.3s ease-in-out;
+  }
+
+  @media (min-width: 768px) {
+    font-size: ${(props) => props.theme.size.N};
   }
 `;

@@ -10,5 +10,14 @@ export const Header = styled.header`
   padding-left: ${(props) => props.theme.space[4]};
   padding-right: ${(props) => props.theme.space[4]};
 
-  background-color: ${props => props.theme.color.semiDark};
+  background-color: ${(props) => props.theme.color.semiDark};
+
+  @media (min-width: 768px) {
+    padding-top: ${(props) => props.theme.space[6]};
+    padding-bottom: ${(props) => props.theme.space[6]};
+    padding-left: ${(props) => props.theme.space[6]};
+    padding-right: ${(props) => props.theme.space[6]};
+
+    border-radius: ${props => props.theme.radius[2]};
+  }
 `;
