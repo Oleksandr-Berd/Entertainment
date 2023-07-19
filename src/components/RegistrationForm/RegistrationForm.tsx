@@ -6,7 +6,6 @@ import { IFormValues } from "interfaces/interfaces"
 import { ChangeEvent } from "react"
 import { IFormProps } from '../../interfaces/interfaces';
 import { useNavigate } from "react-router"
-import { NavLink } from 'react-router-dom';
 
 const InputDataSchema = Yup.object().shape({
     name: Yup.string().min(2, "There is no such short name").required("Name is required"),

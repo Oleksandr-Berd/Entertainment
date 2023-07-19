@@ -1,6 +1,6 @@
 import React, { lazy, useEffect, useState } from 'react';
 
-import { Route, Routes, NavLink } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
 import { GlobalStyles } from './utilities/GlobalStyles';
 import SharedLayout from './components/SharedLayout/SharedLayout';
@@ -10,7 +10,6 @@ import { useAuth } from 'hooks';
 import { useDispatch } from 'react-redux';
 import { refreshUser } from 'redux/auth/operations';
 import AuthLayout from 'components/AuthLayout/AuthLayout';
-import { isError } from 'joi';
 
 const HomePage = lazy(() => import('Pages/HomePage/HomePage'))
 const MoviesPage = lazy(() => import('Pages/MoviesPage/MoviesPage'))
@@ -24,7 +23,6 @@ const UserPage = lazy(() => import('Pages/UserPage/UserPage'))
 
 const App = ():JSX.Element => {
   const [isLoading, setIsLoading] = useState<Boolean>(false)
-  const [setFetchError] = useState(null)
   const [data, setData] = useState<DataArray[]>([])
   const [trending, setTrending] = useState<DataArray[]>([])
   const {isLoggedIn, user, isRefreshing, isError} = useAuth()

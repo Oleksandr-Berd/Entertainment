@@ -10,7 +10,6 @@ import { IFormValues } from "interfaces/interfaces";
 import { useDispatch } from "react-redux";
 import { login, register } from "redux/auth/operations";
 import { AnyAction, Dispatch, ThunkDispatch } from '@reduxjs/toolkit';
-import { useAuth } from "hooks";
 
 
 const AuthPage: React.FC = () => {

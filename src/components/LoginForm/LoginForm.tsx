@@ -5,7 +5,6 @@ import { useFormik } from 'formik';
 import { IFormProps, IFormValues } from 'interfaces/interfaces';
 import { ChangeEvent } from 'react';
 import { useNavigate } from 'react-router';
-import { NavLink } from 'react-router-dom';
 
 const InputValidationSchema = Yup.object().shape({
     email: Yup.string().email().required("Email is required"),
