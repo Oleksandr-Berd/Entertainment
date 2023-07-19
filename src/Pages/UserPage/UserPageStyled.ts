@@ -18,8 +18,8 @@ export const FormStyled = styled.form`
   display: flex;
   flex-direction: column;
 
-  padding-top: ${(props) => props.theme.space[6]};
-  padding-bottom: ${(props) => props.theme.space[6]};
+  padding-top: ${(props) => props.theme.space[10]};
+  padding-bottom: ${(props) => props.theme.space[10]};
   padding-left: ${(props) => props.theme.space[6]};
   padding-right: ${(props) => props.theme.space[6]};
 
@@ -30,7 +30,7 @@ export const FormStyled = styled.form`
   border-radius: ${props => props.theme.radius[1]};
 
   & > *:not(:last-child){
-    margin-bottom: ${props => props.theme.space[7]};
+    margin-bottom: ${props => props.theme.space[10]};
   }
 `;
 
