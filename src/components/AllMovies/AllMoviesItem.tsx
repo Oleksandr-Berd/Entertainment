@@ -30,7 +30,7 @@ const AllMoviesItem: React.FC<ItemProps> = ({ title, thumbnail, year, category, 
 
     const handleBookmark = (evt: MouseEvent<HTMLButtonElement>): void => {
 
-        const { title }: { title: any } = evt.currentTarget;
+        const { title }: { title: string } = evt.currentTarget;
 
         
         dispatch(changeBookmarked({ title: title }));

@@ -9,13 +9,14 @@ import { useAuth } from "hooks";
 
 
 const Header: React.FC = () => {
-    const { isLoggedIn } = useAuth()
+    const { isLoggedIn, isRefreshing } = useAuth()
         
 
     return (<SC.Header>
         <LogoMobileSvg />
         <Navbar />
-        {isLoggedIn ? <UserMenu /> : <AuthNav />}
+
+        {isLoggedIn? <UserMenu /> : !isRefreshing ? <AuthNav/> : <div style={{minWidth: "64px"}}></div>}
 
     </SC.Header> );
 }

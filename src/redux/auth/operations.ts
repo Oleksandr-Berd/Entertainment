@@ -101,7 +101,6 @@ export const changeBookmarked: any = createAsyncThunk(
     async (credentials, thunkAPI) => {
       try {
         const res = await axios.patch("auth/avatars", credentials);
-console.log(res);
 
         return res.data;
       } catch (error: any) {
@@ -109,3 +108,4 @@ console.log(res);
       }
     }
   );
+

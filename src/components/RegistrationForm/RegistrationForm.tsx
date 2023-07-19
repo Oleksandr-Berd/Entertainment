@@ -3,7 +3,7 @@ import { useFormik } from "formik"
 
 import * as SC from "../LoginForm/LoginFormStyled"
 import { IFormValues } from "interfaces/interfaces"
-import { ChangeEvent } from "react"
+import { ChangeEvent, useState } from "react"
 import { IFormProps } from '../../interfaces/interfaces';
 import { useNavigate } from "react-router"
 
@@ -17,6 +17,8 @@ const InputDataSchema = Yup.object().shape({
 
 const RegistrationForm: React.FC<IFormProps> = ({ submit }) => {
     const navigate = useNavigate()
+    const [isError, setIsError] = useState<string | null>(null)
+
 
     const formik = useFormik<IFormValues>({
         initialValues: {
@@ -38,12 +40,19 @@ const RegistrationForm: React.FC<IFormProps> = ({ submit }) => {
 
     const handleSubmit = (evt: ChangeEvent<HTMLFormElement>): void => {
         evt.preventDefault()
+        try {
+            submit({ name, email, password })
+            navigate("/auth/login")
+        } catch (error) {
+            setIsError(String(error))
 
-        submit({ name, email, password })
-        navigate("/auth/login")
+        }
+
     }
 
     return (<SC.FormContainer>
+        {isError ? <h1>{isError}</h1> : null}
+
         <form onSubmit={handleSubmit}>
             <SC.TitleContainer>
                 <SC.Title>Sign Up</SC.Title>

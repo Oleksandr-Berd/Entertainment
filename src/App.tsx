@@ -9,7 +9,7 @@ import { fetchAllMovies, fetchTrending } from 'utilities/services';
 import { DataArray } from 'interfaces/interfaces';
 import { useAuth } from 'hooks';
 import { useDispatch } from 'react-redux';
-import { addAvatar, refreshUser } from 'redux/auth/operations';
+import { refreshUser } from 'redux/auth/operations';
 import UserPage from 'Pages/UserPage/UserPage';
 
 const HomePage = lazy(() => import('Pages/HomePage/HomePage'))
@@ -26,7 +26,7 @@ const App = ():JSX.Element => {
   const [isError, setIsError] = useState<null | string>(null)
   const [data, setData] = useState<DataArray[]>([])
   const [trending, setTrending] = useState<DataArray[]>([])
-  const {isLoggedIn, user} = useAuth()
+  const {isLoggedIn, user, isRefreshing} = useAuth()
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -65,9 +65,9 @@ const App = ():JSX.Element => {
 
   const { bookmarked } = user;
 
-  let bookmarkedMovies: any = data.filter(({ title }) => bookmarked.includes(title))
-  let movies: any = data.filter(({ category }) => category === "Movie")
-  let tvSeries: any = data.filter(({ category }) => category === "TV Series");
+  let bookmarkedMovies: DataArray[] = data.filter(({ title }) => bookmarked.includes(title))
+  let movies: DataArray[] = data.filter(({ category }) => category === "Movie")
+  let tvSeries: DataArray[] = data.filter(({ category }) => category === "TV Series");
 
  
 
@@ -79,7 +79,7 @@ const App = ():JSX.Element => {
           <Route index element={<HomePage data={data} isLoading={isLoading} isError={isError} trending={trending} />}/>
           <Route path='/movies' element={<MoviesPage data={movies} isError={isError} />}/>
           <Route path='/tv' element={<TVPage data={tvSeries } />} />
-          <Route path='/bookmarked' element={<Bookmarked data={isLoggedIn ? bookmarkedMovies : "Please Login" }/>} />
+          <Route path='/bookmarked' element={<Bookmarked data={isLoggedIn ? bookmarkedMovies : !isRefreshing ? "Please Login" : null }/>} />
         </Route>
         <Route path="auth" element={<AuthLayout />}>
           <Route path='/auth/login' element={<AuthPage />} />

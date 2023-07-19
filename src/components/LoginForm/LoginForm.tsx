@@ -3,7 +3,7 @@ import * as Yup from 'yup';
 import * as SC from "./LoginFormStyled"
 import { useFormik } from 'formik';
 import { IFormProps, IFormValues } from 'interfaces/interfaces';
-import { ChangeEvent, FormEvent } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 import { useNavigate } from 'react-router';
 
 const InputValidationSchema = Yup.object().shape({
@@ -14,6 +14,7 @@ const InputValidationSchema = Yup.object().shape({
 
 const LoginForm: React.FC<IFormProps> = ({ submit }) => {
     const navigate = useNavigate()
+    const [isError, setIsError] = useState<string | null>(null)
 
     const formik = useFormik<Partial<IFormValues>> ({
         initialValues: {
@@ -37,8 +38,8 @@ const LoginForm: React.FC<IFormProps> = ({ submit }) => {
 try {
     submit({ email, password })
     navigate("/")
-} catch (error:any) {
-   console.log(error);
+} catch (error: unknown | null) {
+   setIsError(String(error))
    
 }
 
@@ -47,7 +48,7 @@ try {
     }
 
     return (<SC.FormContainer>
-        
+        {isError ? <h1>{isError}</h1> : null}
             <form onSubmit={handleSubmit}>
                 <SC.TitleContainer>
                     <SC.Title>Login</SC.Title>

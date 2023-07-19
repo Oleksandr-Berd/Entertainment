@@ -7,8 +7,6 @@ import Trending from 'components/Trending/Trending';
 import Search from 'components/Search/Search';
 import SearchPage from 'Pages/SearchPage/SearchPage';
 import { DataArray } from 'interfaces/interfaces';
-import { useAuth } from 'hooks';
-
 
 interface IProps {
     data: DataArray[],

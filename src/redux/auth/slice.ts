@@ -76,7 +76,8 @@ const authSlice = createSlice({
       })
 
       .addCase(refreshUser.pending, (state) => {
-        state.isRefreshing = true;
+          state.isRefreshing = true;
+          
       })
       .addCase(refreshUser.fulfilled, (state, action: PayloadAction<any>) => {
         state.user = action.payload;
@@ -95,7 +96,6 @@ const authSlice = createSlice({
         }
     )
         .addCase(addAvatar.fulfilled, (state, action: PayloadAction<any>) => {
-            console.log(action.payload);
             
             state.user.avatarUrl = action.payload
         }

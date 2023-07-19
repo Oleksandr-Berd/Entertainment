@@ -9,11 +9,12 @@ import RegistrationForm from "components/RegistrationForm/RegistrationForm";
 import { IFormValues } from "interfaces/interfaces";
 import { useDispatch } from "react-redux";
 import { login, register } from "redux/auth/operations";
+import { Dispatch } from '@reduxjs/toolkit';
 
 
 const AuthPage: React.FC = () => {
     const location = useLocation()
-    const dispatch = useDispatch<any>()
+    const dispatch = useDispatch<Dispatch>()
 
 
     const handleSubmit = (data: IFormValues) => {

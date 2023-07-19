@@ -1,17 +1,15 @@
 import { useState } from "react";
 
-export const useAuthHeader = (token: any) => {
-  const [authHeader, setAuthHeader] = useState<any>(null);
+export const useAuthHeader = (token: string) => {
+  const [authHeader, setAuthHeader] = useState<string | null>(null);
 
   if (token) {
-    setAuthHeader({
-      Authorization: `Bearer ${token}`,
-    });
+    setAuthHeader(`Bearer ${token}`);
   } else {
     setAuthHeader(null);
   }
 
-  const setToken = (newToken: any) => {
+  const setToken = (newToken: string) => {
     setAuthHeader(newToken);
   };
 

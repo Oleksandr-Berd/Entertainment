@@ -1,6 +1,10 @@
 import { NavLink } from "react-router-dom";
 import styled from "styled-components"
 
+interface IPropsUserPageStyle {
+    status: string
+}
+
 export const CommonContainer = styled.div`
   padding-top: ${(props) => props.theme.space[11]};
   padding-bottom: 170px;
@@ -30,13 +34,15 @@ export const FormStyled = styled.form`
   }
 `;
 
-export const LabelStyled = styled.label`
+export const LabelStyled = styled.label<IPropsUserPageStyle>`
   display: inline-block;
   padding-top: ${(props) => props.theme.space[2]};
   padding-bottom: ${(props) => props.theme.space[2]};
 
-  background-color: ${(props) => props.theme.color.red};
-  color: ${(props) => props.theme.color.white};
+  background-color: ${(props) =>
+    props.status === "empty" ? props.theme.color.red : props.theme.color.green};
+  color: ${(props) =>
+    props.status === "empty" ? props.theme.color.white : props.theme.color.main};
   border-radius: ${(props) => props.theme.radius[0]};
 
   cursor: pointer;

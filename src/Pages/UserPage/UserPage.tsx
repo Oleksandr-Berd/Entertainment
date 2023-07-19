@@ -2,8 +2,7 @@
 import { useLocation, useNavigate } from "react-router";
 import * as SC from "./UserPageStyled"
 import { ReactComponent as LogoSvg } from "assets/icons/logoMobile.svg"
-import { useEffect, useState } from "react";
-import { useAuth } from "hooks";
+import { useState } from "react";
 import { addAvatar } from "redux/auth/operations";
 import { useDispatch } from "react-redux";
 
@@ -14,7 +13,6 @@ interface IProps {
 }
 
 const UserPage: React.FC<IProps> = ({ name, email }) => {
-    const {user} = useAuth()
     const [avatar, setAvatar] = useState<any>("")
     const location = useLocation()
     const navigate = useNavigate()
@@ -36,17 +34,19 @@ const UserPage: React.FC<IProps> = ({ name, email }) => {
         navigate("/")
    }
 
+    const avatarButtonText = avatar ? "Avatar is chosen, please submit" : "Choose Your Avatar"
+    
+    
     return (<SC.CommonContainer>
         <LogoSvg width={36} />
         <SC.FormStyled onSubmit={updateAvatar}>
             <h1>{name}</h1>
             <h2>{email}</h2>
-            <SC.LabelStyled htmlFor="file-input" >
-                Choose Your Avatar
+            <SC.LabelStyled htmlFor="file-input" status={avatar ? "chosen" : "empty"}>
+                {avatarButtonText}
             </SC.LabelStyled>
             <SC.InputStyled type="file" id="file-input" name="avatar" onChange={attachAvatar} />
             <SC.SubmitButton>Submit</SC.SubmitButton>
-            <SC.SubmitButton>Delete</SC.SubmitButton>
             <SC.BackLink to="/" state={{ from: location }}>Back</SC.BackLink>
         </SC.FormStyled>
 
