@@ -11,7 +11,6 @@ export interface IDataProps{
 }
 export interface IFormProps {
   submit: (data: IFormValues) => void;
-  isError: string | null;
 }
 
 export interface DataArray {

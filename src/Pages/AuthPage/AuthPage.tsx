@@ -16,7 +16,6 @@ import { useAuth } from "hooks";
 const AuthPage: React.FC = () => {
     const location = useLocation()
     const dispatch = useDispatch<Dispatch>()
-    const { isError } = useAuth()
 
 
 
@@ -30,7 +29,7 @@ const AuthPage: React.FC = () => {
     }
     return (<SC.AuthContainer>
         <LogoSvg width={36} />
-        {location.pathname === "/auth/login" ? <LoginForm submit={handleSubmit} isError={isError} /> : <RegistrationForm submit={handleSubmit} isError={isError} />}
+        {location.pathname === "/auth/login" ? <LoginForm submit={handleSubmit} /> : <RegistrationForm submit={handleSubmit} />}
     </SC.AuthContainer>);
 }
 

@@ -4,7 +4,11 @@ import { Outlet } from "react-router-dom";
 
 import * as SC from './AuthLayoutStyled'
 
-const AuthLayout:React.FC = () => {
+const AuthLayout: React.FC = () => {
+    
+ 
+    
+    
     return (<SC.StyledAuthLayout>
         <Suspense
             fallback={
@@ -20,6 +24,7 @@ const AuthLayout:React.FC = () => {
         >
             <Outlet />
         </Suspense>
+        
     </SC.StyledAuthLayout> );
 }
  

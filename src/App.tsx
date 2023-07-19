@@ -1,6 +1,6 @@
 import React, { lazy, useEffect, useState } from 'react';
 
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, NavLink } from 'react-router-dom';
 
 import { GlobalStyles } from './utilities/GlobalStyles';
 import SharedLayout from './components/SharedLayout/SharedLayout';
@@ -10,6 +10,7 @@ import { useAuth } from 'hooks';
 import { useDispatch } from 'react-redux';
 import { refreshUser } from 'redux/auth/operations';
 import AuthLayout from 'components/AuthLayout/AuthLayout';
+import { isError } from 'joi';
 
 const HomePage = lazy(() => import('Pages/HomePage/HomePage'))
 const MoviesPage = lazy(() => import('Pages/MoviesPage/MoviesPage'))
@@ -23,10 +24,10 @@ const UserPage = lazy(() => import('Pages/UserPage/UserPage'))
 
 const App = ():JSX.Element => {
   const [isLoading, setIsLoading] = useState<Boolean>(false)
-  const [isError, setIsError] = useState<null | string>(null)
+  const [setFetchError] = useState(null)
   const [data, setData] = useState<DataArray[]>([])
   const [trending, setTrending] = useState<DataArray[]>([])
-  const {isLoggedIn, user, isRefreshing} = useAuth()
+  const {isLoggedIn, user, isRefreshing, isError} = useAuth()
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -39,7 +40,8 @@ const App = ():JSX.Element => {
       const result = await fetchAllMovies()
       setData(result.data)
     } catch (error) {
-      setIsError(error as string)
+      console.log(error);
+      
     } finally {
       setIsLoading(false)
     }
@@ -53,7 +55,8 @@ const App = ():JSX.Element => {
       const result = await fetchTrending()
       setTrending(result.data.result)
     } catch (error) {
-      setIsError(String(error) as string)
+      console.log(error);
+      
     } finally {
       setIsLoading(false)
     }
@@ -74,6 +77,7 @@ const App = ():JSX.Element => {
   return (
     <div className="App">
       <GlobalStyles />
+      {isError ? <h1>{String(isError)}</h1>: 
       <Routes>
         <Route path="/" element={<SharedLayout />}>
           <Route index element={<HomePage data={data} isLoading={isLoading} isError={isError} trending={trending} />}/>
@@ -87,7 +91,8 @@ const App = ():JSX.Element => {
           <Route path='/auth/user' element={<UserPage name={user.name} email={user.email} />} />
           <Route path='*' element={<NotFound />} />
         </Route>
-      </Routes>
+      </Routes>}
+      
     </div>
   );
 }

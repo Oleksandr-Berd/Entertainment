@@ -16,9 +16,8 @@ const InputDataSchema = Yup.object().shape({
 
 
 
-const RegistrationForm: React.FC<IFormProps> = ({ submit, isError }) => {
+const RegistrationForm: React.FC<IFormProps> = ({ submit }) => {
     const navigate = useNavigate()
-    // const [isError, setIsError] = useState<string | null>(null)
 
 
     const formik = useFormik<IFormValues>({
@@ -43,10 +42,10 @@ const RegistrationForm: React.FC<IFormProps> = ({ submit, isError }) => {
         evt.preventDefault()
         try {
             submit({ name, email, password })
-            if (!isError) {
+           
                 navigate("/auth/login")
 
-            }
+         
         } catch (error) {
             console.log(error);
 
@@ -54,8 +53,7 @@ const RegistrationForm: React.FC<IFormProps> = ({ submit, isError }) => {
     }
 
     return (<SC.FormContainer>
-        {isError ?
-            <><h1>{isError}</h1><NavLink to="/">To the Home Page</NavLink></> : <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
             <SC.TitleContainer>
                 <SC.Title>Sign Up</SC.Title>
             </SC.TitleContainer>
@@ -74,7 +72,7 @@ const RegistrationForm: React.FC<IFormProps> = ({ submit, isError }) => {
                 <SC.Text>Already have an account?</SC.Text>
                 <SC.StyledLink to="/auth/login">Login</SC.StyledLink>
             </div>
-        </form>}
+        </form>
     </SC.FormContainer>);
 }
 
