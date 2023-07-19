@@ -37,19 +37,14 @@ export const StyledInput = styled.input`
   padding-left: ${(props) => props.theme.space[4]};
   padding-bottom: ${(props) => props.theme.space[5]};
 
-  &:not(:last-child) {
-    margin-bottom: ${(props) => props.theme.space[7]};
-  }
-
-  &:last-child {
-    margin-bottom: ${(props) => props.theme.space[11]};
-  }
 
   background-color: transparent;
+  color: ${props => props.theme.color.white};
 
   border: none;
 
   border-bottom: 1px solid ${(props) => props.theme.color.secondary};
+
 `;
 
 export const StyledButton = styled.button`
@@ -88,7 +83,7 @@ export const StyledLink = styled(NavLink)`
 
   text-decoration: none;
 
-  color: ${(props) => props.theme.color.white};
+  color: ${(props) => props.theme.color.red};
   font-weight: ${(props) => props.theme.weight.normal};
   font-size: ${(props) => props.theme.size.S};
 
@@ -97,5 +92,19 @@ export const StyledLink = styled(NavLink)`
   &:hover {
     color: ${(props) => props.theme.color.red};
     transition: color 0.3s ease-in-out;
+  }
+`;
+
+export const ErrorStyled = styled.span`
+margin-top: ${props => props.theme.space[2]};
+
+color: ${props => props.theme.color.red};
+
+  &:not(:last-child) {
+    margin-bottom: ${(props) => props.theme.space[7]};
+  }
+
+  &:last-child {
+    margin-bottom: ${(props) => props.theme.space[11]};
   }
 `;

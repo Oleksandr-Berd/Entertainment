@@ -1,6 +1,10 @@
+import { MouseEvent, useState } from 'react';
+
 import * as SC from "./AllMoviesStyled"
 import { navIcons } from "utilities/navIcons"
 import {ReactComponent as BookmarkSvg} from "../../assets/icons/Bookmark.svg"
+import { useDispatch } from 'react-redux';
+import { changeBookmarked } from 'redux/auth/operations';
 
 interface ItemProps {
     title: string,
@@ -12,18 +16,31 @@ interface ItemProps {
 }
 
 
-
 const MovieIcon = navIcons.moviesMob;
 const TvIcon = navIcons.tvMob
 
-const AllMoviesItem = ({ title, thumbnail, year, category, rating, isBookmarked }: ItemProps): JSX.Element => {
+const AllMoviesItem: React.FC<ItemProps> = ({ title, thumbnail, year, category, rating, isBookmarked }) => {
+    const [iconBookmarked, setIconBookmarked] = useState(isBookmarked)
+
+    const dispatch = useDispatch()
+      
+
     const thumbnailMobile = thumbnail?.regular?.small ?? ""
 
 
+    const handleBookmark = (evt: MouseEvent<HTMLButtonElement>): void => {
+
+        const { title }: { title: string } = evt.currentTarget;
+
+        
+        dispatch(changeBookmarked({ title: title }));
+        
+        setIconBookmarked(!iconBookmarked)
+    }
     return (<li>
         <SC.BookmarkContainer>
-            <SC.BookmarkButton type="button">
-                <BookmarkSvg width={12} height={14} stroke="white" fill={isBookmarked ? "white" : "none"} style={{ strokeWidth: "2px", opacity:"1" }} />
+            <SC.BookmarkButton type="button" onClick={handleBookmark} title={title}>
+                <BookmarkSvg width={12} height={14} stroke="white" fill={iconBookmarked ? "white" : "none"} style={{ strokeWidth: "2px", opacity:"1" }} />
             </SC.BookmarkButton>
             <SC.AllMoviesItemImage src={thumbnailMobile} alt="" />
         </SC.BookmarkContainer>

@@ -74,6 +74,7 @@ const theme: object = {
     main: "#10141E",
     secondary: "#5A698F",
     semiDark: "#161D2F",
+    green: "#00FF00",
   },
 
   radius: [

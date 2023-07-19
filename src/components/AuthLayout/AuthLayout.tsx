@@ -4,7 +4,7 @@ import { Outlet } from "react-router-dom";
 
 import * as SC from './AuthLayoutStyled'
 
-const AuthLayout = () => {
+const AuthLayout:React.FC = () => {
     return (<SC.StyledAuthLayout>
         <Suspense
             fallback={

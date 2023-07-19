@@ -1,5 +1,4 @@
-import { useEffect, useState } from 'react';
-import { fetchAllMovies, fetchTrending } from 'utilities/services';
+import { useState } from 'react';
 import AllMovies from '../../components/AllMovies/AllMovies';
 import { Dna } from 'react-loader-spinner';
 
@@ -7,59 +6,22 @@ import * as SC from "./HomePageStyled"
 import Trending from 'components/Trending/Trending';
 import Search from 'components/Search/Search';
 import SearchPage from 'Pages/SearchPage/SearchPage';
+import { DataArray } from 'interfaces/interfaces';
 
-export interface DataArray {
-    _id: string,
-    title: string,
-    thumbnail: { regular: { small: string }, trending?: { small: string, large: string } }
-    ,
-    year: number,
-    category: string,
-    rating: string,
-    isBookmarked: boolean,
-    isTrending: boolean,
-    image: string,
+interface IProps {
+    data: DataArray[],
+    isLoading: Boolean,
+    trending: DataArray[],
+    isError: null | string
 }
 
-
-const HomePage = (): JSX.Element => {
-    const [isLoading, setIsLoading] = useState<Boolean>(false)
-    const [isError, setIsError] = useState<null | string>(null)
-    const [data, setData] = useState<DataArray[]>([])
-    const [trending, setTrending] = useState<DataArray[]>([])
+const HomePage: React.FC<IProps> = ({ data, isLoading, trending, isError }): JSX.Element => {
+ 
     const [searchData, setSearchData] = useState<DataArray[] | null>([])
     const [searchFilter, setSearchFilter] = useState("")
-    
 
+    const placeholder = "Search for movies or TV series"
 
-    const getAllMovies = async () => {
-        setIsLoading(true)
-        try {
-            const result = await fetchAllMovies()
-            setData(result.data)
-        } catch (error) {
-            setIsError(error as string)
-        } finally {
-            setIsLoading(false)
-        }
-
-    }
-
-    const getTrending = async () => {
-        setIsLoading(true)
-        try {
-            const result = await fetchTrending()
-            setTrending(result.data.result)
-        } catch (error) {
-            setIsError(error as string)
-        } finally {
-            setIsLoading(false)
-        }
-    }
-    useEffect(() => {
-        getAllMovies()
-        getTrending()
-    }, [])
 
     const getSearchData = (filter: string): void => {
 
@@ -72,7 +34,7 @@ const HomePage = (): JSX.Element => {
             )
             setSearchData(filterData.length > 0 ? filterData : null)
 
-            setSearchFilter(filter) 
+            setSearchFilter(filter)
         } else {
             setSearchData([])
         }
@@ -82,7 +44,8 @@ const HomePage = (): JSX.Element => {
 
     return (
         <SC.CommonContainer>
-            <Search submitSearch={getSearchData} />
+            {isError ? <h1>{isError}</h1> : null}
+            <Search submitSearch={getSearchData} placeholder={placeholder } />
             {!!searchData && searchData.length > 0 ? <SearchPage searchMovie={searchData} searchFilter={searchFilter} /> : searchData === null ? <SearchPage searchMovie={searchData} searchFilter={searchFilter} /> : <><SC.Title>Trending</SC.Title>
                 {isLoading ? <Dna
                     visible={true}

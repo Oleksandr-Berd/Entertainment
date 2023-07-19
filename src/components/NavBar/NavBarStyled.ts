@@ -14,15 +14,15 @@ export const Item = styled.li`
 `
 
 export const Link = styled(NavLink)`
+display: flex;
+align-items: center;
+justify-content: center;
+
   & > * {
     transition: fill 0.3s ease-in-out;
   }
 
-  /* &:hover > *
-  {
-    fill: ${(props) => props.theme.color.red};
-    transition: fill 0.3s ease-in-out;
-  } */
+ 
 `;
 
 export const Image = styled.img`
