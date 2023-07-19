@@ -13,22 +13,24 @@ interface IProps {
 }
 
 const UserPage: React.FC<IProps> = ({ name, email }) => {
-    const [avatar, setAvatar] = useState<any>("")
+    const [avatar, setAvatar] = useState < object | null>(null)
     const location = useLocation()
     const navigate = useNavigate()
     const dispatch = useDispatch();
 
 
-    const attachAvatar = (evt: any) => {
-        const file = evt.target.files[0];
+    const attachAvatar = (evt: React.ChangeEvent<HTMLInputElement>) => {
+        const file = evt.target.files && evt.target.files[0];
+
         const formData = new FormData();
-        formData.append("avatar", file, file.name);
+        if (file) {
+            formData.append("avatar", file, file.name);
+        }
 
-        setAvatar(formData)
+        setAvatar(formData);
+    };
 
-    }
-
-    const updateAvatar = (evt: any) => {
+    const updateAvatar = (evt: React.FormEvent) => {
        evt.preventDefault()
         dispatch(addAvatar(avatar))
         navigate("/")

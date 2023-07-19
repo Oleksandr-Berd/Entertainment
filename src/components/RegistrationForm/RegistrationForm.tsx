@@ -3,9 +3,10 @@ import { useFormik } from "formik"
 
 import * as SC from "../LoginForm/LoginFormStyled"
 import { IFormValues } from "interfaces/interfaces"
-import { ChangeEvent, useState } from "react"
+import { ChangeEvent } from "react"
 import { IFormProps } from '../../interfaces/interfaces';
 import { useNavigate } from "react-router"
+import { NavLink } from 'react-router-dom';
 
 const InputDataSchema = Yup.object().shape({
     name: Yup.string().min(2, "There is no such short name").required("Name is required"),
@@ -15,9 +16,9 @@ const InputDataSchema = Yup.object().shape({
 
 
 
-const RegistrationForm: React.FC<IFormProps> = ({ submit }) => {
+const RegistrationForm: React.FC<IFormProps> = ({ submit, isError }) => {
     const navigate = useNavigate()
-    const [isError, setIsError] = useState<string | null>(null)
+    // const [isError, setIsError] = useState<string | null>(null)
 
 
     const formik = useFormik<IFormValues>({
@@ -42,18 +43,19 @@ const RegistrationForm: React.FC<IFormProps> = ({ submit }) => {
         evt.preventDefault()
         try {
             submit({ name, email, password })
-            navigate("/auth/login")
+            if (!isError) {
+                navigate("/auth/login")
+
+            }
         } catch (error) {
-            setIsError(String(error))
+            console.log(error);
 
         }
-
     }
 
     return (<SC.FormContainer>
-        {isError ? <h1>{isError}</h1> : null}
-
-        <form onSubmit={handleSubmit}>
+        {isError ?
+            <><h1>{isError}</h1><NavLink to="/">To the Home Page</NavLink></> : <form onSubmit={handleSubmit}>
             <SC.TitleContainer>
                 <SC.Title>Sign Up</SC.Title>
             </SC.TitleContainer>
@@ -72,7 +74,7 @@ const RegistrationForm: React.FC<IFormProps> = ({ submit }) => {
                 <SC.Text>Already have an account?</SC.Text>
                 <SC.StyledLink to="/auth/login">Login</SC.StyledLink>
             </div>
-        </form>
+        </form>}
     </SC.FormContainer>);
 }
 

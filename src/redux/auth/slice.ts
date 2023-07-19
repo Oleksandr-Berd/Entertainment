@@ -11,7 +11,7 @@ import {
 interface State {
     user: User,
     token: null | string,
-    error: any,
+    error: string | null,
     isLoggedIn: boolean,
     isRefreshing: boolean
 }
@@ -43,7 +43,8 @@ const authSlice = createSlice({
         state.isLoggedIn = true;
       })
       .addCase(register.rejected, (state, action: PayloadAction<any>) => {
-        return state;
+       state.error = action.payload.message
+        
       })
 
       .addCase(login.pending, (state, action: PayloadAction<any>) => {
@@ -60,8 +61,9 @@ const authSlice = createSlice({
         };
         state.isLoggedIn = true;
       })
-      .addCase(login.rejected, (state, action: PayloadAction<any>) => {
-        state.error = action.payload;
+        .addCase(login.rejected, (state, action: PayloadAction<any>) => {
+          
+       state.error = action.payload;
       })
 
       .addCase(logout.fulfilled, (state) => {

@@ -2,11 +2,18 @@ import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { useAuthHeader } from "hooks/useAuthHeader";
 
+
+export interface IUser {
+    name?: string,
+    email?: string,
+    password?:string,
+}
+
 axios.defaults.baseURL =
   "https://common-server-ldx7.onrender.com/api/entertainment";
 
 
-const setAuthHeader = (token: any) => {
+const setAuthHeader = (token: string | null) => {
     
  axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
@@ -18,9 +25,9 @@ const clearAuthHeader = () => {
 
 
 
-export const register:any = createAsyncThunk(
+export const register = createAsyncThunk(
   "auth/register",
-    async (credentials, thunkAPI) => {
+    async (credentials: IUser, thunkAPI) => {
      
     try {
         const res = await axios.post("/auth/register", credentials);
@@ -29,8 +36,12 @@ export const register:any = createAsyncThunk(
         setAuthHeader(authHeader);
         
       return res.data;
-    } catch (error:any) {
-      return thunkAPI.rejectWithValue(error.message);
+    } catch (error) {
+     if (axios.isAxiosError(error)) {
+       return thunkAPI.rejectWithValue(error.response?.data);
+     } else {
+       return thunkAPI.rejectWithValue("An error occurred.");
+     }
     }
   }
 );

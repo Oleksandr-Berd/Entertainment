@@ -9,33 +9,28 @@ import RegistrationForm from "components/RegistrationForm/RegistrationForm";
 import { IFormValues } from "interfaces/interfaces";
 import { useDispatch } from "react-redux";
 import { login, register } from "redux/auth/operations";
-import { Dispatch } from '@reduxjs/toolkit';
+import { AnyAction, Dispatch, ThunkDispatch } from '@reduxjs/toolkit';
+import { useAuth } from "hooks";
 
 
 const AuthPage: React.FC = () => {
     const location = useLocation()
     const dispatch = useDispatch<Dispatch>()
+    const { isError } = useAuth()
+
 
 
     const handleSubmit = (data: IFormValues) => {
 
         if (data.name) {
-            dispatch(register(data))
+            (dispatch as ThunkDispatch<any, any, AnyAction>)(register(data));
         } else {
-            dispatch(login({ email: data.email, password: data.password } as any))
+            (dispatch as ThunkDispatch<any, any, AnyAction>)(login({ email: data.email, password: data.password }))
         }
-
-       
-
     }
-
     return (<SC.AuthContainer>
-
-
-
-
         <LogoSvg width={36} />
-        {location.pathname === "/auth/login" ? <LoginForm submit={handleSubmit} /> : <RegistrationForm submit={handleSubmit} />}
+        {location.pathname === "/auth/login" ? <LoginForm submit={handleSubmit} isError={isError} /> : <RegistrationForm submit={handleSubmit} isError={isError} />}
     </SC.AuthContainer>);
 }
 

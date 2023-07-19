@@ -28,7 +28,6 @@ const Trending = ({ movies }: MoviesProps): JSX.Element => {
 
 
         dispatch(changeBookmarked({ title: title }));
-        console.log(evt.currentTarget.title);
 
         setMovieBookmarked(!movieBookmarked)
     }

@@ -4,13 +4,12 @@ import { Route, Routes } from "react-router-dom";
 
 import { GlobalStyles } from './utilities/GlobalStyles';
 import SharedLayout from './components/SharedLayout/SharedLayout';
-import AuthLayout from 'components/AuthLayout/AuthLayout';
 import { fetchAllMovies, fetchTrending } from 'utilities/services';
 import { DataArray } from 'interfaces/interfaces';
 import { useAuth } from 'hooks';
 import { useDispatch } from 'react-redux';
 import { refreshUser } from 'redux/auth/operations';
-import UserPage from 'Pages/UserPage/UserPage';
+import AuthLayout from 'components/AuthLayout/AuthLayout';
 
 const HomePage = lazy(() => import('Pages/HomePage/HomePage'))
 const MoviesPage = lazy(() => import('Pages/MoviesPage/MoviesPage'))
@@ -18,6 +17,7 @@ const TVPage = lazy(() => import('Pages/TVPage/TVPage'))
 const Bookmarked = lazy(() => import('Pages/Bookmarked/Bookmarked'))
 const AuthPage = lazy(() => import("./Pages/AuthPage/AuthPage"))
 const NotFound = lazy(() => import("./Pages/NotFound/NotFound"))
+const UserPage = lazy(() => import('Pages/UserPage/UserPage'))
 
 
 
@@ -53,7 +53,7 @@ const App = ():JSX.Element => {
       const result = await fetchTrending()
       setTrending(result.data.result)
     } catch (error) {
-      setIsError(error as string)
+      setIsError(String(error) as string)
     } finally {
       setIsLoading(false)
     }
@@ -79,14 +79,14 @@ const App = ():JSX.Element => {
           <Route index element={<HomePage data={data} isLoading={isLoading} isError={isError} trending={trending} />}/>
           <Route path='/movies' element={<MoviesPage data={movies} isError={isError} />}/>
           <Route path='/tv' element={<TVPage data={tvSeries } />} />
-          <Route path='/bookmarked' element={<Bookmarked data={isLoggedIn ? bookmarkedMovies : !isRefreshing ? "Please Login" : null }/>} />
+          <Route path='/bookmarked' element={<Bookmarked isError={isError} data={isLoggedIn ? bookmarkedMovies : !isRefreshing ? "Please Login" : ""} />}  />
         </Route>
-        <Route path="auth" element={<AuthLayout />}>
+        <Route path="/auth" element={<AuthLayout />}>
           <Route path='/auth/login' element={<AuthPage />} />
           <Route path='/auth/registration' element={<AuthPage />} />
-          <Route path='/auth/user' element={<UserPage name={user.name} email={user.email} /> } />
+          <Route path='/auth/user' element={<UserPage name={user.name} email={user.email} />} />
+          <Route path='*' element={<NotFound />} />
         </Route>
-        <Route path='*' element={<NotFound/>} />
       </Routes>
     </div>
   );

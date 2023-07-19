@@ -10,7 +10,8 @@ export interface IDataProps{
   isError?: null | string
 }
 export interface IFormProps {
-    submit: (data: IFormValues) => void;
+  submit: (data: IFormValues) => void;
+  isError: string | null;
 }
 
 export interface DataArray {
