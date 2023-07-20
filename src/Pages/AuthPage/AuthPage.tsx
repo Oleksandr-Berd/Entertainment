@@ -10,13 +10,14 @@ import { IFormValues } from "interfaces/interfaces";
 import { useDispatch } from "react-redux";
 import { login, register } from "redux/auth/operations";
 import { AnyAction, Dispatch, ThunkDispatch } from '@reduxjs/toolkit';
+import { useMediaQuery } from 'usehooks-ts';
 
 
 const AuthPage: React.FC = () => {
     const location = useLocation()
     const dispatch = useDispatch<Dispatch>()
 
-
+const isTablet = useMediaQuery("(min-width:768px)")
 
     const handleSubmit = (data: IFormValues) => {
 
@@ -27,7 +28,7 @@ const AuthPage: React.FC = () => {
         }
     }
     return (<SC.AuthContainer>
-        <LogoSvg width={36} />
+        <LogoSvg width={isTablet ? 36 : 32} />
         {location.pathname === "/auth/login" ? <LoginForm submit={handleSubmit} /> : <RegistrationForm submit={handleSubmit} />}
     </SC.AuthContainer>);
 }

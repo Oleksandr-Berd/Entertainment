@@ -61,10 +61,10 @@ try {
                 {formik.errors.password ? <SC.ErrorStyled>{formik.errors.password}</SC.ErrorStyled> : <SC.ErrorStyled style={{ color: "transparent" }}>error</SC.ErrorStyled>}
             </SC.InputContainer>
             <SC.StyledButton type="submit">Login to your account</SC.StyledButton>
-            <div>
+            <SC.LinkContainer>
                 <SC.Text>Don't have an account?</SC.Text>
                 <SC.StyledLink to="/auth/registration">Sign Up</SC.StyledLink>
-            </div>
+            </SC.LinkContainer>
         </form>
             
            

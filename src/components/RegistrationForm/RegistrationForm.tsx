@@ -67,10 +67,10 @@ const RegistrationForm: React.FC<IFormProps> = ({ submit }) => {
 
             </SC.InputContainer>
             <SC.StyledButton type="submit">Sign Up</SC.StyledButton>
-            <div>
+            <SC.LinkContainer>
                 <SC.Text>Already have an account?</SC.Text>
                 <SC.StyledLink to="/auth/login">Login</SC.StyledLink>
-            </div>
+            </SC.LinkContainer>
         </form>
     </SC.FormContainer>);
 }
