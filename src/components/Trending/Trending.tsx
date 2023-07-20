@@ -23,7 +23,9 @@ const Trending = ({ movies }: MoviesProps): JSX.Element => {
     const [movieBookmarked, setMovieBookmarked] = useState<boolean>(false)
     const dispatch = useDispatch()
 
-    const isTablet = useMediaQuery("(min-width: 768px)")
+    const isTablet = useMediaQuery("(min-width: 768px) and (max-width: 1439px")
+    const isDesktop = useMediaQuery("(min-width: 1440px)")
+
 
     const handleBookmark = (evt: MouseEvent<HTMLButtonElement>): void => {
 
@@ -35,7 +37,7 @@ const Trending = ({ movies }: MoviesProps): JSX.Element => {
         setMovieBookmarked(!movieBookmarked)
     }
 
-    return (<Carousel data-bs-theme="dark" style={ { marginBottom: isTablet ? "39px" : "24px", marginTop: isTablet ? "25px": "16px" }}>
+    return (<Carousel data-bs-theme="dark" style={ { marginBottom: isTablet ? "39px" : isDesktop ? "40px" : "24px", marginTop: isTablet ? "25px": isDesktop ? "25px" : "16px" }}>
         {!!movies ? movies.map(({ _id, title, thumbnail, year, category, rating }) => {
             const thumbnailMobile = thumbnail?.trending?.small ?? ""
             const thumbnailDesktopTablet = thumbnail?.trending?.large ?? ""
@@ -46,7 +48,7 @@ const Trending = ({ movies }: MoviesProps): JSX.Element => {
                     </SC.BookmarkButton>
                     <SC.ImageTrending
                         className="d-block w-100"
-                        src={isTablet ? thumbnailDesktopTablet : thumbnailMobile}
+                        src={isTablet ? thumbnailDesktopTablet : isDesktop ? thumbnailDesktopTablet : thumbnailMobile}
                         alt={title}
                     />
 

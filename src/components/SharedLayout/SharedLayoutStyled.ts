@@ -13,5 +13,8 @@ export const SharedLayout = styled.div`
 
   @media (min-width: 1440px) {
     min-width: ${(props) => props.theme.width.desktop};
+
+    display: flex;
+    flex-direction: row;
   }
 `;

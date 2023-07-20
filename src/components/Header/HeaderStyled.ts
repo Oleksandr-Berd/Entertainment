@@ -18,6 +18,22 @@ export const Header = styled.header`
     padding-left: ${(props) => props.theme.space[6]};
     padding-right: ${(props) => props.theme.space[6]};
 
-    border-radius: ${props => props.theme.radius[2]};
+    border-radius: ${(props) => props.theme.radius[2]};
+  }
+
+  @media (min-width: 1440px) {
+    width: 96px;
+    height: 960px;
+
+    flex-direction: column;
+
+    padding-top: 35px;
+    padding-bottom: ${(props) => props.theme.space[8]};
+    padding-left: 28px;
+    padding-right: 28px;
   }
 `;
+
+
+
+  
