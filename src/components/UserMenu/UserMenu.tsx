@@ -14,6 +14,7 @@ const UserMenu:React.FC = () => {
     const { avatarUrl, name } = user
     
     const isMobile = useMediaQuery("(max-width:767px)")
+    const isDesktop = useMediaQuery("(min-width:1440px)")
 
 
     const handleClick = () => {
@@ -21,13 +22,13 @@ dispatch(logout())
     }
     
     return (<SC.CommonContainer>
-        {!isMobile ? <SC.Greeting>Welcome {name} !</SC.Greeting> : null}
+        {!isMobile ? null : isDesktop ? null : <SC.Greeting>Welcome {name} </SC.Greeting>}
         <NavLink to="/auth/user">
             
             <SC.Avatar src={avatarUrl} alt={name} />
         </NavLink>
         
-        <SC.ButtonLogout onClick={handleClick}><IoMdLogOut size={24} fill='white'/></SC.ButtonLogout>
+        <SC.ButtonLogout onClick={handleClick}><IoMdLogOut size={isDesktop ? 42 : 24} fill='white'/></SC.ButtonLogout>
     </SC.CommonContainer>
        );
 }

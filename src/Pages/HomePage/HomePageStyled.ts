@@ -12,6 +12,12 @@ export const CommonContainer = styled.div`
     padding-right: ${(props) => props.theme.space[6]};
     padding-left: ${(props) => props.theme.space[6]};
   }
+
+  @media (min-width: 1440px) {
+    padding-top: 0;
+    padding-left: ${(props) => props.theme.space[9]};
+    padding-right: ${(props) => props.theme.space[9]};
+  }
 `;
 
 export const Title = styled.h2`

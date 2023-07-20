@@ -7,6 +7,10 @@ export const CommonContainer = styled(Carousel)`
   align-items: center;
 
   margin-bottom: ${props => props.theme.space[6]};
+
+  @media (min-width: 1440px){
+    justify-content: center;
+  }
 `;
 
 export const ItemStyled = styled(Carousel.Item)`
@@ -16,6 +20,11 @@ export const ItemStyled = styled(Carousel.Item)`
   min-height: 140px;
 
   color: ${(props) => props.theme.color.white};
+
+  /* @media (min-width: 1440px){
+    width: 670px;
+    /* height: 230px; */
+  } */
 `;
 
 export const ImageTrending = styled.img`
@@ -23,6 +32,11 @@ export const ImageTrending = styled.img`
   min-height: ${(props) => props.theme.percentage[10]};
 
   border-radius: ${(props) => props.theme.radius[1]};
+
+  @media (min-width: 1440px){
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 export const BookmarkButton = styled.button`

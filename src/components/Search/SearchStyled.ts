@@ -10,6 +10,10 @@ export const CommonContainer = styled.div`
   @media (min-width: 768px) {
     margin-bottom: 34px;
   }
+
+  @media (min-width: 1440px) {
+    margin-top: 33px;
+  }
 `;
 
 export const SearchInput = styled.input`
@@ -26,5 +30,11 @@ export const SearchInput = styled.input`
 
   @media (min-width: 768px) {
     margin-left: ${(props) => props.theme.space[6]};
+  }
+
+  @media (min-width: 1440px) {
+    margin-left: ${(props) => props.theme.space[6]};
+
+    font-size: ${(props) => props.theme.size.XXN};
   }
 `;

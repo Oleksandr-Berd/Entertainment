@@ -20,7 +20,9 @@ const Search: React.FC<ISearchProps> = ({ submitSearch, placeholder } ) => {
       
     }
     
-const isTablet = useMediaQuery("(min-width:768px")
+    const isTablet = useMediaQuery("(min-width:768px) and (max-width: 1439px)")
+    const isDesktop = useMediaQuery("(min-width:1440px)")
+
 
     useEffect(() => {
 
@@ -32,7 +34,7 @@ const isTablet = useMediaQuery("(min-width:768px")
 
     return (<SC.CommonContainer>
         <div>
-            <BiSearchAlt size={isTablet ? 24 : 18} />
+            <BiSearchAlt size={isTablet ? 24 : isDesktop ? "32px" : 18} />
         </div>
         <SC.SearchInput type="text" onChange={handleChange} placeholder={placeholder } />
     </SC.CommonContainer> );

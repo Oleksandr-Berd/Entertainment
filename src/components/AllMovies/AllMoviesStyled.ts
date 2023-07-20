@@ -4,18 +4,33 @@ export const CommonContainer = styled.div``;
 
 export const AllMoviesList = styled.ul`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: ${(props) => props.theme.space[4]};
 
   margin-top: ${(props) => props.theme.space[6]};
+
+  grid-template-columns: repeat(3, 1fr);
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+  }
+
+  @media (min-width: 1440px) {
+    grid-template-columns: repeat(4, 1fr);
+
+    margin-top: ${(props) => props.theme.space[8]};
+  }
 `;
 
 export const AllMoviesItemStyled = styled.li`
   min-width: 164px;
 
-  @media (min-width: 768px){
+  @media (min-width: 768px) {
     min-width: 220px;
-    gap: 29px;
+  }
+
+  @media (min-width: 1440px) {
+    width: 280px;
   }
 `;
 
