@@ -1,4 +1,4 @@
-import React, { lazy, useEffect, useRef, useState } from 'react';
+import React, { lazy, useEffect, useMemo, useRef, useState } from 'react';
 
 import { Route, Routes } from 'react-router-dom';
 
@@ -27,6 +27,7 @@ const App = ():JSX.Element => {
   const fetchedTrending = useRef<DataArray[]>([])
   const {isLoggedIn, user, isRefreshing, isError} = useAuth()
   const dispatch = useDispatch();
+  
 
   useEffect(() => {
     dispatch(refreshUser());
@@ -68,11 +69,17 @@ const App = ():JSX.Element => {
 
   const { bookmarked } = user;
 
-  let bookmarkedMovies: DataArray[] = data.filter(({ title }) => bookmarked.includes(title))
-  let movies: DataArray[] = data.filter(({ category }) => category === "Movie")
-  let tvSeries: DataArray[] = data.filter(({ category }) => category === "TV Series");
+  const getMovies = useMemo(():DataArray[] => {
+    return data.filter(({ category }) => category === "Movie")
+  }, [data])
 
- 
+  const getTvSeries = useMemo((): DataArray[] => {
+    return data.filter(({ category }) => category === "TV Series");
+  }, [data])
+  
+  const getBookmarked = useMemo((): DataArray[] => {
+    return data.filter(({ title }) => bookmarked.includes(title));
+  },[bookmarked, data])
 
   return (
     <div className="App">
@@ -81,9 +88,9 @@ const App = ():JSX.Element => {
       <Routes>
         <Route path="/" element={<SharedLayout />}>
           <Route index element={<HomePage data={data} isLoading={isLoading} isError={isError} trending={trending} />}/>
-          <Route path='/movies' element={<MoviesPage data={movies} isError={isError} />}/>
-          <Route path='/tv' element={<TVPage data={tvSeries } />} />
-          <Route path='/bookmarked' element={<Bookmarked isError={isError} data={isLoggedIn ? bookmarkedMovies : !isRefreshing ? "Please Login" : ""} />}  />
+            <Route path='/movies' element={<MoviesPage data={getMovies} isError={isError} />}/>
+            <Route path='/tv' element={<TVPage data={getTvSeries } />} />
+            <Route path='/bookmarked' element={<Bookmarked isError={isError} data={isLoggedIn ? getBookmarked : !isRefreshing ? "Please Login" : ""} />}  />
         </Route>
         <Route path="/auth" element={<AuthLayout />}>
           <Route path='/auth/login' element={<AuthPage />} />
