@@ -62,6 +62,10 @@ export const AllMoviesItemImage = styled.img`
   margin-bottom: ${(props) => props.theme.space[2]};
 
   border-radius: ${(props) => props.theme.radius[1]};
+
+  @media (min-width: 768px){
+    min-height: 140px;
+  }
 `;
 
 export const AllMoviesInfoContainer = styled.div`
@@ -78,6 +82,16 @@ export const AllMoviesInfoContainer = styled.div`
   & > :not(:last-child) {
     margin-right: 6px;
   }
+
+  @media (min-width: 768px) {
+    margin-bottom: 5px;
+
+    & > :not(:last-child) {
+      margin-right: ${(props) => props.theme.space[2]};
+    }
+
+    font-size: 13px;
+  }
 `;
 
 export const Circle = styled.div`
@@ -87,9 +101,18 @@ export const Circle = styled.div`
   background-color: ${(props) => props.theme.color.grey};
 
   border-radius: ${(props) => props.theme.radius[5]};
+
+  @media (min-width: 768px) {
+    width: 3px;
+    height: 3px;
+  }
 `;
 
 export const MovieTitle = styled.h3`
   font-weight: ${(props) => props.theme.weight.normal};
   font-size: 14px;
+
+  @media (min-width: 768px) {
+    font-size: 14px;
+  }
 `;
