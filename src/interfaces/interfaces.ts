@@ -17,7 +17,7 @@ export interface DataArray {
   _id: string;
   title: string;
   thumbnail: {
-    regular: { small: string };
+    regular: { small: string, medium: string, large: string };
     trending?: { small: string; large: string };
   };
   year: number;

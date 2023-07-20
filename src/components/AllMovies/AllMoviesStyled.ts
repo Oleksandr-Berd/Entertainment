@@ -4,7 +4,7 @@ export const CommonContainer = styled.div``;
 
 export const AllMoviesList = styled.ul`
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: ${(props) => props.theme.space[4]};
 
   margin-top: ${(props) => props.theme.space[6]};
@@ -12,6 +12,11 @@ export const AllMoviesList = styled.ul`
 
 export const AllMoviesItemStyled = styled.li`
   min-width: 164px;
+
+  @media (min-width: 768px){
+    min-width: 220px;
+    gap: 29px;
+  }
 `;
 
 export const BookmarkContainer = styled.div`
@@ -43,6 +48,10 @@ export const BookmarkButton = styled.button`
   &:active {
     background-color: ${(props) => props.theme.color.semiDark};
     border: none;
+  }
+
+  @media (min-width: 768px) {
+    transform: translateY(16px) translateX(-16px);
   }
 `;
 

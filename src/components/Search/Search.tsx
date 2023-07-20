@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { BiSearchAlt } from 'react-icons/bi';
 
 import * as SC from "./SearchStyled"
+import { useMediaQuery } from 'usehooks-ts';
 
 interface ISearchProps {
     submitSearch: (filter: string) => void
@@ -19,7 +20,7 @@ const Search: React.FC<ISearchProps> = ({ submitSearch, placeholder } ) => {
       
     }
     
-
+const isTablet = useMediaQuery("(min-width:768px")
 
     useEffect(() => {
 
@@ -31,7 +32,7 @@ const Search: React.FC<ISearchProps> = ({ submitSearch, placeholder } ) => {
 
     return (<SC.CommonContainer>
         <div>
-            <BiSearchAlt size={18} />
+            <BiSearchAlt size={isTablet ? 24 : 18} />
         </div>
         <SC.SearchInput type="text" onChange={handleChange} placeholder={placeholder } />
     </SC.CommonContainer> );

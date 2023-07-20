@@ -1,6 +1,6 @@
 import React, { lazy, useEffect, useMemo, useRef, useState } from 'react';
 
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 
 import { GlobalStyles } from './utilities/GlobalStyles';
 import SharedLayout from './components/SharedLayout/SharedLayout';
@@ -95,7 +95,7 @@ const App = ():JSX.Element => {
         <Route path="/auth" element={<AuthLayout />}>
           <Route path='/auth/login' element={<AuthPage />} />
           <Route path='/auth/registration' element={<AuthPage />} />
-          <Route path='/auth/user' element={<UserPage name={user.name} email={user.email} />} />
+            <Route path='/auth/user' element={<UserPage name={user.name} email={user.email} />} />
           <Route path='*' element={<NotFound />} />
         </Route>
       </Routes>}
