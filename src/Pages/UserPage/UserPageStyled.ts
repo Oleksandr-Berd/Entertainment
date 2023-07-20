@@ -12,25 +12,34 @@ export const CommonContainer = styled.div`
   padding-right: ${(props) => props.theme.space[6]};
 
   text-align: center;
+
+  @media (min-width: 768px) {
+    padding-top: 80px;
+    padding-bottom: 473px;
+    padding-left: 184px;
+    padding-right: 184px;
+  }
 `;
 
 export const FormStyled = styled.form`
   display: flex;
   flex-direction: column;
 
-  padding-top: ${(props) => props.theme.space[6]};
-  padding-bottom: ${(props) => props.theme.space[6]};
+  padding-top: ${(props) => props.theme.space[10]};
+  padding-bottom: ${(props) => props.theme.space[10]};
   padding-left: ${(props) => props.theme.space[6]};
   padding-right: ${(props) => props.theme.space[6]};
 
   margin-top: 60px;
+
+  font-style: italic;
 
   background-color: ${(props) => props.theme.color.semiDark};
 
   border-radius: ${props => props.theme.radius[1]};
 
   & > *:not(:last-child){
-    margin-bottom: ${props => props.theme.space[7]};
+    margin-bottom: ${props => props.theme.space[10]};
   }
 `;
 
@@ -39,6 +48,7 @@ export const LabelStyled = styled.label<IPropsUserPageStyle>`
   padding-top: ${(props) => props.theme.space[2]};
   padding-bottom: ${(props) => props.theme.space[2]};
 
+  font-style: normal;
   background-color: ${(props) =>
     props.status === "empty" ? props.theme.color.red : props.theme.color.green};
   color: ${(props) =>
@@ -62,6 +72,7 @@ export const SubmitButton = styled.button`
   padding-top: ${(props) => props.theme.space[2]};
   padding-bottom: ${(props) => props.theme.space[2]};
 
+
   background-color: ${(props) => props.theme.color.red};
   color: ${(props) => props.theme.color.white};
   font-weight: ${(props) => props.theme.weight.normal};
@@ -71,5 +82,6 @@ export const SubmitButton = styled.button`
 `;
 
 export const BackLink = styled(NavLink)`
-color: ${props => props.theme.color.white};
-`
+  font-style: normal;
+  color: ${(props) => props.theme.color.white};
+`;

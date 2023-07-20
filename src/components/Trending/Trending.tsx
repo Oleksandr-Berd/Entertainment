@@ -8,6 +8,7 @@ import { DataArray } from 'interfaces/interfaces';
 import { MouseEvent, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { changeBookmarked } from 'redux/auth/operations';
+import { useMediaQuery } from 'usehooks-ts';
 
 interface MoviesProps {
     movies?: DataArray[];
@@ -22,6 +23,8 @@ const Trending = ({ movies }: MoviesProps): JSX.Element => {
     const [movieBookmarked, setMovieBookmarked] = useState<boolean>(false)
     const dispatch = useDispatch()
 
+    const isTablet = useMediaQuery("(min-width: 768px)")
+
     const handleBookmark = (evt: MouseEvent<HTMLButtonElement>): void => {
 
         const { title }: { title: string } = evt.currentTarget;
@@ -32,9 +35,10 @@ const Trending = ({ movies }: MoviesProps): JSX.Element => {
         setMovieBookmarked(!movieBookmarked)
     }
 
-    return (<Carousel data-bs-theme="dark" style={{ marginBottom: "24px", marginTop: "16px" }}>
-        {!!movies ? movies.map(({ _id, title, thumbnail, year, category, rating, isBookmarked }) => {
+    return (<Carousel data-bs-theme="dark" style={ { marginBottom: isTablet ? "39px" : "24px", marginTop: isTablet ? "25px": "16px" }}>
+        {!!movies ? movies.map(({ _id, title, thumbnail, year, category, rating }) => {
             const thumbnailMobile = thumbnail?.trending?.small ?? ""
+            const thumbnailDesktopTablet = thumbnail?.trending?.large ?? ""
             return (
                 <SC.ItemStyled key={_id}>
                     <SC.BookmarkButton onClick={handleBookmark} title={title}>
@@ -42,7 +46,7 @@ const Trending = ({ movies }: MoviesProps): JSX.Element => {
                     </SC.BookmarkButton>
                     <SC.ImageTrending
                         className="d-block w-100"
-                        src={thumbnailMobile}
+                        src={isTablet ? thumbnailDesktopTablet : thumbnailMobile}
                         alt={title}
                     />
 

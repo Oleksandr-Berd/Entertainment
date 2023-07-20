@@ -4,7 +4,7 @@ export const CommonContainer = styled.div``;
 
 export const AllMoviesList = styled.ul`
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: ${(props) => props.theme.space[4]};
 
   margin-top: ${(props) => props.theme.space[6]};
@@ -12,6 +12,11 @@ export const AllMoviesList = styled.ul`
 
 export const AllMoviesItemStyled = styled.li`
   min-width: 164px;
+
+  @media (min-width: 768px){
+    min-width: 220px;
+    gap: 29px;
+  }
 `;
 
 export const BookmarkContainer = styled.div`
@@ -44,6 +49,10 @@ export const BookmarkButton = styled.button`
     background-color: ${(props) => props.theme.color.semiDark};
     border: none;
   }
+
+  @media (min-width: 768px) {
+    transform: translateY(16px) translateX(-16px);
+  }
 `;
 
 export const AllMoviesItemImage = styled.img`
@@ -53,6 +62,10 @@ export const AllMoviesItemImage = styled.img`
   margin-bottom: ${(props) => props.theme.space[2]};
 
   border-radius: ${(props) => props.theme.radius[1]};
+
+  @media (min-width: 768px){
+    min-height: 140px;
+  }
 `;
 
 export const AllMoviesInfoContainer = styled.div`
@@ -69,6 +82,16 @@ export const AllMoviesInfoContainer = styled.div`
   & > :not(:last-child) {
     margin-right: 6px;
   }
+
+  @media (min-width: 768px) {
+    margin-bottom: 5px;
+
+    & > :not(:last-child) {
+      margin-right: ${(props) => props.theme.space[2]};
+    }
+
+    font-size: 13px;
+  }
 `;
 
 export const Circle = styled.div`
@@ -78,9 +101,18 @@ export const Circle = styled.div`
   background-color: ${(props) => props.theme.color.grey};
 
   border-radius: ${(props) => props.theme.radius[5]};
+
+  @media (min-width: 768px) {
+    width: 3px;
+    height: 3px;
+  }
 `;
 
 export const MovieTitle = styled.h3`
   font-weight: ${(props) => props.theme.weight.normal};
   font-size: 14px;
+
+  @media (min-width: 768px) {
+    font-size: 14px;
+  }
 `;

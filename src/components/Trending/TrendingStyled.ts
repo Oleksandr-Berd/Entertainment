@@ -53,6 +53,10 @@ export const BookmarkButton = styled.button`
     background-color: ${(props) => props.theme.color.semiDark};
     border: none;
   }
+
+  @media (min-width: 768px) {
+    transform: translateY(16px) translateX(-24px);
+  }
 `;
 
 export const CaptionStyled = styled(Carousel.Caption)`
@@ -69,6 +73,11 @@ export const Circle = styled.div`
   background-color: ${(props) => props.theme.color.white};
 
   border-radius: ${(props) => props.theme.radius[5]};
+
+  @media (min-width: 768px) {
+    width: 3px;
+    height: 3px;
+  }
 `;
 
 export const ContentContainer = styled.div`
@@ -76,7 +85,7 @@ export const ContentContainer = styled.div`
   flex-direction: row;
   align-items: center;
 
-  margin-bottom: ${props => props.theme.space[1]};
+  margin-bottom: ${(props) => props.theme.space[1]};
 
   font-size: 12px;
   color: ${(props) => props.theme.color.white};
@@ -84,14 +93,24 @@ export const ContentContainer = styled.div`
   & > *:not(:last-child) {
     margin-right: ${(props) => props.theme.space[2]};
   }
+
+  @media (min-width: 768px) {
+    margin-bottom: 3px;
+
+    font-size: 15px;
+  }
 `;
 
 export const Title = styled.h5`
   text-align: left;
 
   color: ${(props) => props.theme.color.white};
-  font-weight: ${props => props.theme.weight.normal};
+  font-weight: ${(props) => props.theme.weight.normal};
   font-size: 15px;
+
+  @media (min-width: 768px) {
+    font-size: ${props => props.theme.size.XXN};
+  }
 `;
 
 export const RatingContainer = styled.div`

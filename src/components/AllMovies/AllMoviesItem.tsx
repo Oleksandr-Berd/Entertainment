@@ -5,10 +5,11 @@ import { navIcons } from "utilities/navIcons"
 import {ReactComponent as BookmarkSvg} from "../../assets/icons/Bookmark.svg"
 import { useDispatch } from 'react-redux';
 import { changeBookmarked } from 'redux/auth/operations';
+import { useMediaQuery } from 'usehooks-ts';
 
 interface ItemProps {
     title: string,
-    thumbnail: { regular: { small: string } } | undefined,
+    thumbnail: { regular: { small: string, medium: string} } | undefined,
     year: number,
     category: string,
     rating: string,
@@ -24,8 +25,11 @@ const AllMoviesItem: React.FC<ItemProps> = ({ title, thumbnail, year, category, 
 
     const dispatch = useDispatch()
       
+    const isTablet = useMediaQuery("(min-width:768px)")
 
     const thumbnailMobile = thumbnail?.regular?.small ?? ""
+
+    const thumbnailTablet = thumbnail?.regular?.medium ?? ""
 
 
     const handleBookmark = (evt: MouseEvent<HTMLButtonElement>): void => {
@@ -42,7 +46,7 @@ const AllMoviesItem: React.FC<ItemProps> = ({ title, thumbnail, year, category, 
             <SC.BookmarkButton type="button" onClick={handleBookmark} title={title}>
                 <BookmarkSvg width={12} height={14} stroke="white" fill={iconBookmarked ? "white" : "none"} style={{ strokeWidth: "2px", opacity:"1" }} />
             </SC.BookmarkButton>
-            <SC.AllMoviesItemImage src={thumbnailMobile} alt="" />
+            <SC.AllMoviesItemImage src={isTablet ? thumbnailTablet : thumbnailMobile} alt={title} />
         </SC.BookmarkContainer>
         <SC.AllMoviesInfoContainer>
             <p>{year}</p>

@@ -6,10 +6,6 @@ export const CommonContainer = styled.div`
   align-items: center;
 `;
 
-export const Greeting = styled.h4`
-font-size: ${props => props.theme.size.N};
-`
-
 export const Avatar = styled.img`
   width: ${(props) => props.theme.space[6]};
   height: ${(props) => props.theme.space[6]};
@@ -28,4 +24,7 @@ background-color: transparent;
 
 border: none;
 border-radius: ${props => props.theme.radius[5]};
+`
+export const Greeting = styled.p`
+margin-right: ${props => props.theme.space[4]};
 `

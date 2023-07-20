@@ -1,6 +1,6 @@
-import React, { lazy, useEffect, useState } from 'react';
+import React, { lazy, useEffect, useMemo, useRef, useState } from 'react';
 
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes } from 'react-router-dom';
 
 import { GlobalStyles } from './utilities/GlobalStyles';
 import SharedLayout from './components/SharedLayout/SharedLayout';
@@ -23,11 +23,11 @@ const UserPage = lazy(() => import('Pages/UserPage/UserPage'))
 
 const App = ():JSX.Element => {
   const [isLoading, setIsLoading] = useState<Boolean>(false)
-  const [isError, setIsError] = useState<null | string>(null)
-  const [data, setData] = useState<DataArray[]>([])
-  const [trending, setTrending] = useState<DataArray[]>([])
-  const {isLoggedIn, user, isRefreshing} = useAuth()
+  const fetchedData = useRef<DataArray[]>([])
+  const fetchedTrending = useRef<DataArray[]>([])
+  const {isLoggedIn, user, isRefreshing, isError} = useAuth()
   const dispatch = useDispatch();
+  
 
   useEffect(() => {
     dispatch(refreshUser());
@@ -37,23 +37,27 @@ const App = ():JSX.Element => {
     setIsLoading(true)
     try {
       const result = await fetchAllMovies()
-      setData(result.data)
+      fetchedData.current = result.data
     } catch (error) {
-      setIsError(error as string)
+      console.log(error);
+      
     } finally {
       setIsLoading(false)
     }
 
   }
 
+  const data = fetchedData.current
+  const trending = fetchedTrending.current
 
   const getTrending = async () => {
     setIsLoading(true)
     try {
       const result = await fetchTrending()
-      setTrending(result.data.result)
+      fetchedTrending.current = result.data.result
     } catch (error) {
-      setIsError(String(error) as string)
+      console.log(error);
+      
     } finally {
       setIsLoading(false)
     }
@@ -65,29 +69,37 @@ const App = ():JSX.Element => {
 
   const { bookmarked } = user;
 
-  let bookmarkedMovies: DataArray[] = data.filter(({ title }) => bookmarked.includes(title))
-  let movies: DataArray[] = data.filter(({ category }) => category === "Movie")
-  let tvSeries: DataArray[] = data.filter(({ category }) => category === "TV Series");
+  const getMovies = useMemo(():DataArray[] => {
+    return data.filter(({ category }) => category === "Movie")
+  }, [data])
 
- 
+  const getTvSeries = useMemo((): DataArray[] => {
+    return data.filter(({ category }) => category === "TV Series");
+  }, [data])
+  
+  const getBookmarked = useMemo((): DataArray[] => {
+    return data.filter(({ title }) => bookmarked.includes(title));
+  },[bookmarked, data])
 
   return (
     <div className="App">
       <GlobalStyles />
+      {isError ? <h1>{String(isError)}</h1>: 
       <Routes>
         <Route path="/" element={<SharedLayout />}>
           <Route index element={<HomePage data={data} isLoading={isLoading} isError={isError} trending={trending} />}/>
-          <Route path='/movies' element={<MoviesPage data={movies} isError={isError} />}/>
-          <Route path='/tv' element={<TVPage data={tvSeries } />} />
-          <Route path='/bookmarked' element={<Bookmarked isError={isError} data={isLoggedIn ? bookmarkedMovies : !isRefreshing ? "Please Login" : ""} />}  />
+            <Route path='/movies' element={<MoviesPage data={getMovies} isError={isError} />}/>
+            <Route path='/tv' element={<TVPage data={getTvSeries } />} />
+            <Route path='/bookmarked' element={<Bookmarked isError={isError} data={isLoggedIn ? getBookmarked : !isRefreshing ? "Please Login" : ""} />}  />
         </Route>
         <Route path="/auth" element={<AuthLayout />}>
           <Route path='/auth/login' element={<AuthPage />} />
           <Route path='/auth/registration' element={<AuthPage />} />
-          <Route path='/auth/user' element={<UserPage name={user.name} email={user.email} />} />
+            <Route path='/auth/user' element={<UserPage name={user.name} email={user.email} />} />
           <Route path='*' element={<NotFound />} />
         </Route>
-      </Routes>
+      </Routes>}
+      
     </div>
   );
 }

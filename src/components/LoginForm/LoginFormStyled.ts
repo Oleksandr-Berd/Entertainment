@@ -15,6 +15,15 @@ export const FormContainer = styled.div`
   background-color: ${(props) => props.theme.color.semiDark};
 
   border-radius: ${(props) => props.theme.radius[4]};
+
+  @media (min-width: 768px) {
+    margin-top: ${(props) => props.theme.space[13]};
+
+    padding-top: ${(props) => props.theme.space[8]};
+    padding-bottom: ${(props) => props.theme.space[8]};
+    padding-left: ${(props) => props.theme.space[8]};
+    padding-right: ${(props) => props.theme.space[8]};
+  }
 `;
 
 export const TitleContainer = styled.div`
@@ -26,6 +35,12 @@ export const Title = styled.h3`
 
   font-weight: ${(props) => props.theme.weight.normal};
   font-size: ${(props) => props.theme.size.XN};
+
+  @media (min-width: 768px) {
+    margin-bottom: ${(props) => props.theme.space[10]};
+
+    font-size: ${(props) => props.theme.size.M};
+  }
 `;
 
 export const InputContainer = styled.div`
@@ -37,14 +52,17 @@ export const StyledInput = styled.input`
   padding-left: ${(props) => props.theme.space[4]};
   padding-bottom: ${(props) => props.theme.space[5]};
 
-
   background-color: transparent;
-  color: ${props => props.theme.color.white};
+  color: ${(props) => props.theme.color.white};
 
   border: none;
 
   border-bottom: 1px solid ${(props) => props.theme.color.secondary};
 
+  @media (min-width: 768px) {
+    padding-left: 18px;
+    padding-bottom: 18px;
+  }
 `;
 
 export const StyledButton = styled.button`
@@ -74,6 +92,12 @@ export const StyledButton = styled.button`
 export const Text = styled.p`
   font-weight: ${(props) => props.theme.weight.normal};
   font-size: ${(props) => props.theme.size.S};
+
+  @media (min-width: 768px) {
+    margin-right: 9px;
+
+    font-size: ${(props) => props.theme.size.N};
+  }
 `;
 
 export const StyledLink = styled(NavLink)`
@@ -93,12 +117,17 @@ export const StyledLink = styled(NavLink)`
     color: ${(props) => props.theme.color.red};
     transition: color 0.3s ease-in-out;
   }
+
+  @media (min-width: 768px) {
+    margin-top: 0;
+    font-size: ${(props) => props.theme.size.N};
+  }
 `;
 
 export const ErrorStyled = styled.span`
-margin-top: ${props => props.theme.space[2]};
+  margin-top: ${(props) => props.theme.space[2]};
 
-color: ${props => props.theme.color.red};
+  color: ${(props) => props.theme.color.red};
 
   &:not(:last-child) {
     margin-bottom: ${(props) => props.theme.space[7]};
@@ -106,5 +135,14 @@ color: ${props => props.theme.color.red};
 
   &:last-child {
     margin-bottom: ${(props) => props.theme.space[11]};
+  }
+`;
+
+export const LinkContainer = styled.div`
+  @media (min-width: 768px) {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
   }
 `;

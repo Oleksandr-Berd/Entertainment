@@ -5,7 +5,6 @@ import { useFormik } from 'formik';
 import { IFormProps, IFormValues } from 'interfaces/interfaces';
 import { ChangeEvent } from 'react';
 import { useNavigate } from 'react-router';
-import { NavLink } from 'react-router-dom';
 
 const InputValidationSchema = Yup.object().shape({
     email: Yup.string().email().required("Email is required"),
@@ -13,7 +12,7 @@ const InputValidationSchema = Yup.object().shape({
 })
 
 
-const LoginForm: React.FC<IFormProps> = ({ submit, isError }) => {
+const LoginForm: React.FC<IFormProps> = ({ submit }) => {
     const navigate = useNavigate()
 
     const formik = useFormik<Partial<IFormValues>> ({
@@ -37,9 +36,9 @@ const LoginForm: React.FC<IFormProps> = ({ submit, isError }) => {
         evt.preventDefault()
 try {
     submit({ email, password })
-    if (!isError) {
+   
         navigate("/")
-    }
+   
    
 } catch (error) {
     console.log(error);
@@ -51,7 +50,7 @@ try {
     }
 
     return (<SC.FormContainer>
-        {isError ? <> <h1>{isError}</h1><NavLink to="/">To the Home Page</NavLink> </> : <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
             <SC.TitleContainer>
                 <SC.Title>Login</SC.Title>
             </SC.TitleContainer>
@@ -62,11 +61,11 @@ try {
                 {formik.errors.password ? <SC.ErrorStyled>{formik.errors.password}</SC.ErrorStyled> : <SC.ErrorStyled style={{ color: "transparent" }}>error</SC.ErrorStyled>}
             </SC.InputContainer>
             <SC.StyledButton type="submit">Login to your account</SC.StyledButton>
-            <div>
+            <SC.LinkContainer>
                 <SC.Text>Don't have an account?</SC.Text>
                 <SC.StyledLink to="/auth/registration">Sign Up</SC.StyledLink>
-            </div>
-        </form>}
+            </SC.LinkContainer>
+        </form>
             
            
        

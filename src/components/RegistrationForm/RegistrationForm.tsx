@@ -6,7 +6,6 @@ import { IFormValues } from "interfaces/interfaces"
 import { ChangeEvent } from "react"
 import { IFormProps } from '../../interfaces/interfaces';
 import { useNavigate } from "react-router"
-import { NavLink } from 'react-router-dom';
 
 const InputDataSchema = Yup.object().shape({
     name: Yup.string().min(2, "There is no such short name").required("Name is required"),
@@ -16,9 +15,8 @@ const InputDataSchema = Yup.object().shape({
 
 
 
-const RegistrationForm: React.FC<IFormProps> = ({ submit, isError }) => {
+const RegistrationForm: React.FC<IFormProps> = ({ submit }) => {
     const navigate = useNavigate()
-    // const [isError, setIsError] = useState<string | null>(null)
 
 
     const formik = useFormik<IFormValues>({
@@ -43,10 +41,10 @@ const RegistrationForm: React.FC<IFormProps> = ({ submit, isError }) => {
         evt.preventDefault()
         try {
             submit({ name, email, password })
-            if (!isError) {
+           
                 navigate("/auth/login")
 
-            }
+         
         } catch (error) {
             console.log(error);
 
@@ -54,8 +52,7 @@ const RegistrationForm: React.FC<IFormProps> = ({ submit, isError }) => {
     }
 
     return (<SC.FormContainer>
-        {isError ?
-            <><h1>{isError}</h1><NavLink to="/">To the Home Page</NavLink></> : <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
             <SC.TitleContainer>
                 <SC.Title>Sign Up</SC.Title>
             </SC.TitleContainer>
@@ -70,11 +67,11 @@ const RegistrationForm: React.FC<IFormProps> = ({ submit, isError }) => {
 
             </SC.InputContainer>
             <SC.StyledButton type="submit">Sign Up</SC.StyledButton>
-            <div>
+            <SC.LinkContainer>
                 <SC.Text>Already have an account?</SC.Text>
                 <SC.StyledLink to="/auth/login">Login</SC.StyledLink>
-            </div>
-        </form>}
+            </SC.LinkContainer>
+        </form>
     </SC.FormContainer>);
 }
 
