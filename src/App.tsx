@@ -1,6 +1,6 @@
 import React, { lazy, useEffect, useMemo, useRef, useState } from 'react';
 
-import { Route, Routes, useLocation } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
 import { GlobalStyles } from './utilities/GlobalStyles';
 import SharedLayout from './components/SharedLayout/SharedLayout';
