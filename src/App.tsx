@@ -1,4 +1,4 @@
-import React, { lazy, useEffect, useState } from 'react';
+import React, { lazy, useEffect, useRef, useState } from 'react';
 
 import { Route, Routes } from 'react-router-dom';
 
@@ -23,8 +23,8 @@ const UserPage = lazy(() => import('Pages/UserPage/UserPage'))
 
 const App = ():JSX.Element => {
   const [isLoading, setIsLoading] = useState<Boolean>(false)
-  const [data, setData] = useState<DataArray[]>([])
-  const [trending, setTrending] = useState<DataArray[]>([])
+  const fetchedData = useRef<DataArray[]>([])
+  const fetchedTrending = useRef<DataArray[]>([])
   const {isLoggedIn, user, isRefreshing, isError} = useAuth()
   const dispatch = useDispatch();
 
@@ -36,7 +36,7 @@ const App = ():JSX.Element => {
     setIsLoading(true)
     try {
       const result = await fetchAllMovies()
-      setData(result.data)
+      fetchedData.current = result.data
     } catch (error) {
       console.log(error);
       
@@ -46,12 +46,14 @@ const App = ():JSX.Element => {
 
   }
 
+  const data = fetchedData.current
+  const trending = fetchedTrending.current
 
   const getTrending = async () => {
     setIsLoading(true)
     try {
       const result = await fetchTrending()
-      setTrending(result.data.result)
+      fetchedTrending.current = result.data.result
     } catch (error) {
       console.log(error);
       
