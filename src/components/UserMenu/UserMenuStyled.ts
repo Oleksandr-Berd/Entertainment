@@ -8,6 +8,8 @@ export const CommonContainer = styled.div`
   @media (min-width: 1440px){
     flex-direction: column;
   }
+
+ 
 `;
 
 export const Avatar = styled.img`

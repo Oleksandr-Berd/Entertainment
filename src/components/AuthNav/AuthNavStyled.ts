@@ -4,6 +4,10 @@ import { NavLink } from "react-router-dom";
 export const AuthNav = styled.nav`
 display: flex;
 align-items: center;
+
+@media (min-width: 1440px){
+  flex-direction: column;
+}
 `
 
 export const AuthNavItem = styled.li`
@@ -12,6 +16,11 @@ export const AuthNavItem = styled.li`
 
     @media (min-width: 768px) {
       margin-right: ${(props) => props.theme.space[6]};
+    }
+
+    @media (min-width: 1440px) {
+      margin-right: 0;
+      margin-bottom: ${(props) => props.theme.space[6]};
     }
   }
 `;
